@@ -8,15 +8,28 @@ using System.IO;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
-    private void Awake()
+    /*    private void Awake()
+        {
+            if (Instance)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }*/
+    void Awake()
     {
-        if (Instance)
+        DontDestroyOnLoad(this);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
         {
             Destroy(gameObject);
-            return;
         }
-        DontDestroyOnLoad(gameObject);
-        Instance = this;
     }
     public override void OnEnable()
     {
@@ -37,6 +50,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate( "PlayerManager", Vector3.zero, Quaternion.identity);
         }
     }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("oneleftRoomFunction");
+        base.OnLeftRoom();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            //   PhotonNetwork.LeaveRoom();
+             DontDestroyOnLoad(this);
+            //     SceneManager.LoadScene(0);
+           // Destroy(this);
+            PhotonNetwork.LoadLevel(2);
+
+        }
+    }
+
+
 
 
 

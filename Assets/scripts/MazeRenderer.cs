@@ -58,6 +58,8 @@ public class MazeRenderer : MonoBehaviourPun
                     var topWall = Instantiate(wallPrefab, transform) as Transform;
                     topWall.position = position + new Vector3(0, 0, size / 2);// the position of the wall 
                     topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);// the size of the wall
+                //    PhotonView pv = topWall.GetComponent<PhotonView>();
+              //      PhotonNetwork.AllocateViewID(pv);
                 }
 
                 if (cell.HasFlag(WallState.LEFT)) // draw left wall

@@ -45,4 +45,16 @@ public class menuManager : MonoBehaviour
         menu.Close();
     }
 
+
+    public bool MenuIsActive(string menuName)
+    {
+        for (int i = 0; i < menus.Length; i++)
+        {
+            if (menus[i].menuName == menuName)
+            {
+                return menus[i].isActive();
+            }
+        }
+        return false;
+    }
 }

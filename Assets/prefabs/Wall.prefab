@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3503650747288892949}
   - component: {fileID: 7767717394932269750}
   - component: {fileID: 329429978644058226}
-  - component: {fileID: 1037108948078485905}
   - component: {fileID: 5837625483492001504}
+  - component: {fileID: 7368544477020429683}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -114,19 +114,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &1037108948078485905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110014100807712009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00b2b214232a2745900f65e8c802780, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 50
 --- !u!114 &5837625483492001504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,4 +129,17 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
+--- !u!114 &7368544477020429683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110014100807712009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a8b093800d3fe47abe8263ed55e818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50

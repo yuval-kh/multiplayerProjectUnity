@@ -10,10 +10,12 @@ public class RoomListItem : MonoBehaviour {
   RoomInfo info;
   public void SetUp(RoomInfo _info) {
     info = _info;
+
     label.text = _info.Name;
   }
 
   public void OnClick() {
-    Launcher.Instance.JoinRoom(info);
+    //    Debug.Log("room info: " + info.Name);
+        Launcher.Instance.JoinRoom(info);
   }
 }

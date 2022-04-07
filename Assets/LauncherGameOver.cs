@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
+using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using System.Linq;
 
-public class Launcher : MonoBehaviourPunCallbacks
+public class LauncherGameOver : MonoBehaviourPunCallbacks
 {
-    public static Launcher Instance;
+    public static LauncherGameOver Instance;
 
-    [SerializeField] TMP_InputField playerNameInputField;
-    [SerializeField] TMP_Text titleWelcomeText;
+
+   // [SerializeField] TMP_InputField playerNameInputField;
+  //  [SerializeField] TMP_Text titleWelcomeText;
     [SerializeField] TMP_InputField roomNameInputField;
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomListItemPrefab;
@@ -19,11 +20,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject playerListItemPrefab;
     [SerializeField] GameObject startGameButton;
-    //   [SerializeField] TMP_Text errorText;
-
-
-
- //  public GameObject roomManager;
 
 
 
@@ -31,70 +27,65 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Instance = this;
     }
+
+    // Start is called before the first frame update
+/*    void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        PhotonNetwork.JoinLobby();
+    }*/
+
     private void Start()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-    //    Instantiate(roomManager, new Vector3(0,0,0), Quaternion.identity);
-        if (!PhotonNetwork.IsConnected)
-        {
-            //  Debug.Log("Connecting to master...");
-            
-            PhotonNetwork.ConnectUsingSettings();
-        }
-        else
-        {
-            Debug.Log("already connected");
-            menuManager.Instance.OpenMenu("gameover");
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            PhotonNetwork.JoinLobby();
-        }
+        PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
-    {
-       // Debug.Log("Connected to master!");
+    { 
+        Debug.Log("Connected to master!");
         PhotonNetwork.JoinLobby();
         // Automatically load scene for all clients when the host loads a scene
         PhotonNetwork.AutomaticallySyncScene = true;
     }
     public override void OnJoinedLobby()
     {
-        if (PhotonNetwork.NickName == "")
-        {
-            PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString(); // Set a default nickname, just as a backup
-            menuManager.Instance.OpenMenu("name");
-        }
-        else
-        {
-            if (!menuManager.Instance.MenuIsActive("gameover"))
-            {
-
-                menuManager.Instance.OpenMenu("title");
-            }
-        }
         Debug.Log("Joined lobby");
     }
 
-    public void SetName()
+    // Update is called once per frame
+    void Update()
     {
-        string name = playerNameInputField.text;
-        if (!string.IsNullOrEmpty(name))
-        {
-            PhotonNetwork.NickName = name;
-            titleWelcomeText.text = $"Welcome, {name}!";
-            PhotonNetwork.LoadLevel(2);
-            Destroy(this);
-            menuManager.Instance.OpenMenu("title");
-            playerNameInputField.text = "";
-        }
-        else
-        {
-            Debug.Log("No player name entered");
-            // TODO: Display an error to the user
-        }
+        
     }
+    public void GoToMainMenu()
+    {
+        Debug.Log("Start game method in the script LauncherGameOver :-)");
+        // 1 is used as the build index of the game scene, defined in the build settings
+        // Use this instead of scene management so that *everyone* in the lobby goes into this scene
+        Debug.Log("my name is " + PhotonNetwork.LocalPlayer.NickName);
+        menuManager.Instance.OpenMenu("title");
+        //  PhotonNetwork.LoadLevel(0);
+    }
+
+    /*    public override void OnJoinedLobby()
+        {
+            if (PhotonNetwork.NickName == "")
+            {
+                PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString(); // Set a default nickname, just as a backup
+                menuManager.Instance.OpenMenu("name");
+            }
+            else
+            {
+                menuManager.Instance.OpenMenu("title");
+            }
+            Debug.Log("Joined lobby");
+        }*/
+
+
+
 
     public void CreateRoom()
     {
@@ -115,16 +106,16 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // Called whenever you create or join a room
 
-           ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
-           if (PhotonNetwork.IsMasterClient)
-           {
+        ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+        if (PhotonNetwork.IsMasterClient)
+        {
 
-             int tempSeed = UnityEngine.Random.Range(0, 100000);
+            int tempSeed = UnityEngine.Random.Range(0, 100000);
 
-             hash["seed"] = tempSeed;
+            hash["seed"] = tempSeed;
 
-             PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
-          }
+            PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
+        }
 
         menuManager.Instance.OpenMenu("room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
@@ -135,6 +126,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         for (int i = 0; i < players.Count(); i++)
         {
+
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
         // Only enable the start button if the player is the host of the room
@@ -149,8 +141,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-        PhotonNetwork.AutomaticallySyncScene = false;
-
         menuManager.Instance.OpenMenu("loading");
     }
 
@@ -167,10 +157,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        Debug.Log("OnRoomListUpdate");
         foreach (Transform trans in roomListContent)
         {
             Destroy(trans.gameObject);
         }
+        if (roomList == null)
+            Debug.Log("roomlist is null");
         for (int i = 0; i < roomList.Count; i++)
         {
             if (roomList[i].RemovedFromList)
@@ -178,13 +171,13 @@ public class Launcher : MonoBehaviourPunCallbacks
                 // Don't instantiate stale rooms
                 continue;
             }
-            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem_GameOver>().SetUp(roomList[i]);
         }
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-       // errorText.text = "Room Creation Failed: " + message;
+        // errorText.text = "Room Creation Failed: " + message;
         menuManager.Instance.OpenMenu("error");
     }
 
@@ -197,13 +190,14 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // 1 is used as the build index of the game scene, defined in the build settings
         // Use this instead of scene management so that *everyone* in the lobby goes into this scene
-        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.LoadLevel(1);
     }
+
+
+
 
     public void QuitGame()
     {
         Application.Quit();
     }
-
 }
