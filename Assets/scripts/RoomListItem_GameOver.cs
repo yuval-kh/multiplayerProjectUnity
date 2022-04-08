@@ -19,6 +19,6 @@ public class RoomListItem_GameOver : MonoBehaviour
     public void OnClick()
     {
        // Debug.Log("room info: " + info.Name);
-        Launcher.Instance.JoinRoom(info);
+        LauncherGameOver.Instance.JoinRoom(info);
     }
 }

@@ -21,6 +21,8 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     [SerializeField] GameObject playerListItemPrefab;
     [SerializeField] GameObject startGameButton;
 
+    public static int reloadedNum = 0;
+
 
 
     private void Awake()
@@ -28,31 +30,30 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         Instance = this;
     }
 
-    // Start is called before the first frame update
-/*    void Start()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        PhotonNetwork.JoinLobby();
-    }*/
 
     private void Start()
     {
+        if (reloadedNum == 0)
+        {
+            menuManager.Instance.OpenMenu("title");
+        }
+        reloadedNum++;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnConnectedToMaster()
     { 
-        Debug.Log("Connected to master!");
+        Debug.Log("Connected to masterAA!");
         PhotonNetwork.JoinLobby();
         // Automatically load scene for all clients when the host loads a scene
         PhotonNetwork.AutomaticallySyncScene = true;
     }
     public override void OnJoinedLobby()
     {
-        Debug.Log("Joined lobby");
+        Debug.Log("Joined lobby gameover");
     }
 
     // Update is called once per frame
@@ -67,22 +68,8 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         // Use this instead of scene management so that *everyone* in the lobby goes into this scene
         Debug.Log("my name is " + PhotonNetwork.LocalPlayer.NickName);
         menuManager.Instance.OpenMenu("title");
-        //  PhotonNetwork.LoadLevel(0);
     }
 
-    /*    public override void OnJoinedLobby()
-        {
-            if (PhotonNetwork.NickName == "")
-            {
-                PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString(); // Set a default nickname, just as a backup
-                menuManager.Instance.OpenMenu("name");
-            }
-            else
-            {
-                menuManager.Instance.OpenMenu("title");
-            }
-            Debug.Log("Joined lobby");
-        }*/
 
 
 
@@ -157,7 +144,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Debug.Log("OnRoomListUpdate");
         foreach (Transform trans in roomListContent)
         {
             Destroy(trans.gameObject);

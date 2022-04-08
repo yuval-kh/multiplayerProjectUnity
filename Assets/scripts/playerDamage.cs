@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Shootable : MonoBehaviourPun, IDamageable
+public class playerDamage : MonoBehaviourPun, IDamageable
 {
     public float health = 50f;
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.M))
+        if (Input.GetKey(KeyCode.M)) // will work only if im the last player left.
         {
             Debug.Log("pressed m");
             Die();
@@ -41,29 +41,10 @@ public class Shootable : MonoBehaviourPun, IDamageable
             if (pv == null)
                 return;
             Debug.Log("it's a player");
-       ////     if (pv.IsMine)
-      ////      {
-                Debug.Log("its me - i was kiled");
-                PhotonNetwork.Destroy(gameObject);
-                Debug.Log("!!!!!!!!!!!!!!!d");
-                PhotonNetwork.LeaveRoom();
-                Debug.Log("!!!!!!!!!!wwwwwww!!!!!d");
-                return;
-/*                while (PhotonNetwork.InRoom)
-                 //   yield return null;
-                SceneManager.LoadScene(2);*/
-           //     PhotonNetwork.LoadLevel(2);
-        ////    }
-        ////    else
-        ////    {
-        ////        Debug.Log("i killed a player B-)");
-        ////    }
+            PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.LeaveRoom();
+            return;
         }
-        else
-            Debug.Log("it's not a player");
          Destroy(gameObject);
-
-        Debug.Log("the type is: " + gameObject.GetType());
-        Debug.Log("kill");
     }
 }
