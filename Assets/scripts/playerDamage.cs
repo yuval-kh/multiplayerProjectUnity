@@ -13,7 +13,7 @@ public class playerDamage : MonoBehaviourPun, IDamageable
     {
         if (Input.GetKey(KeyCode.M)) // will work only if im the last player left.
         {
-            Debug.Log("pressed m");
+          //  Debug.Log("pressed m");
             Die();
 
         }
@@ -21,9 +21,8 @@ public class playerDamage : MonoBehaviourPun, IDamageable
     public void TakeDamage(float amount)
     {
         PhotonView pv = gameObject.GetComponent<PhotonView>();
-        if (!pv.IsMine)
-            return;
-        Debug.Log("player TakeDamage");
+      //  if (!pv.IsMine)
+          //  return;
         health -= amount;
         if (health <= 0f)
         {
@@ -33,14 +32,14 @@ public class playerDamage : MonoBehaviourPun, IDamageable
 
     private void Die()
     {
-        Debug.Log("DIE");
+      //  Debug.Log("DIE");
         Movement movement = gameObject.GetComponent<Movement>();
         PhotonView pv = gameObject.GetComponent<PhotonView>();
         if (movement != null)
         {
             if (pv == null)
                 return;
-            Debug.Log("it's a player");
+         //   Debug.Log("it's a player");
             PhotonNetwork.Destroy(gameObject);
             PhotonNetwork.LeaveRoom();
             return;
