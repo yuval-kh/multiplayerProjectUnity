@@ -10,7 +10,12 @@ public class TakeWallDamage : MonoBehaviourPun,IDamageable
 
     public void TakeDamage(float damage)
     {
-        Destroy(gameObject);
+        Debug.Log("damage " + damage);
+        health -= damage;
+        if (health <= 0f)
+        {
+            Destroy(gameObject);
+        }
     }
     public void Die()
     {

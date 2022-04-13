@@ -7,15 +7,8 @@ using Photon.Pun;
 public class Shoot : MonoBehaviourPun
 {
     public Camera camera = null;
-    public float range = 100f;
-    public float gunDamage = 10f;
-    //public float fireRate = 100f; // how fast the gun can shoot
-    //public float nextFire = 0f;
     private PhotonView pv;
     public GameObject player;
-
-
-    /////////////////////////////////////
     public bool singleFire = false;
     public float fireRate = 0.1f;
     public GameObject bulletPrefab;
@@ -30,11 +23,6 @@ public class Shoot : MonoBehaviourPun
     bool canFire = true;
     int bulletsPerMagazineDefault = 0;
 
-
-
-
-
-    /////////////////////////////////////////
 
 
     void Start()
@@ -68,13 +56,6 @@ public class Shoot : MonoBehaviourPun
 [PunRPC]
 private void shoot(Vector3 pos, Vector3 forward)
 {
-/*        Vector3 pos = transform.position;
-        Vector3 forward = camera.transform.forward;
-        pv.RPC("RpcRaycast", RpcTarget.All, pos, forward);*/
-
-
-                ///////////////////////////
-         //       Debug.Log("shoot method!");
         if (!pv.IsMine)
             return;
      //   Debug.Log(Time.time + " is it bigger than " + nextFireTime + "?");
@@ -93,44 +74,29 @@ private void shoot(Vector3 pos, Vector3 forward)
                 }
                 firePoint.LookAt(firePointPointerPosition);
                 //Fire
-                GameObject bulletObject = PhotonNetwork.Instantiate("Bullet", pos, firePoint.rotation);
+                 pv.RPC("makeBulletToAll", RpcTarget.All,pos, firePoint.rotation, weaponDamage);
+/*                GameObject bulletObject = PhotonNetwork.Instantiate("Bullet", pos, firePoint.rotation);
                 SC_Bullet bullet = bulletObject.GetComponent<SC_Bullet>();
-        //    Debug.Log("MAKE DAMAGE: "+ weaponDamage);
+            Debug.Log("MAKE DAMAGE: "+ weaponDamage);
                 //Set bullet damage according to weapon damage value
-                bullet.SetDamage(weaponDamage);
+                bullet.SetDamage(weaponDamage);*/
 
         }
 
 
 
-        /////////////////////
-
     }
+
 
     [PunRPC]
-    public void RpcRaycast (Vector3 position, Vector3 forward)
+    private void makeBulletToAll(Vector3 pos, Quaternion rotation,float damage)
     {
+  //      if (!pv.IsMine)
+   //         return;
+        GameObject bulletObject = Instantiate(bulletPrefab, pos, rotation);
+        SC_Bullet bullet = bulletObject.GetComponent<SC_Bullet>();
+        bullet.SetDamage(damage);
 
-        RaycastHit shooting;
-        if (Physics.Raycast(position, forward, out shooting, range))
-        {
-           // Debug.Log(shooting.transform);
-            pv = GetComponent<PhotonView>();
-            if (pv == null)
-                return;
-            IDamageable target = shooting.transform.GetComponent<IDamageable>();
-            if (target != null)
-            {
-                target.TakeDamage(gunDamage);
-            }
-        }
-        
-    }
 
-    public void RpcAllDamage(IDamageable target)
-    {
-        if (!pv.IsMine)
-            return;
-        target.TakeDamage(gunDamage);
     }
 }

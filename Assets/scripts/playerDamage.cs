@@ -21,8 +21,8 @@ public class playerDamage : MonoBehaviourPun, IDamageable
     public void TakeDamage(float amount)
     {
         PhotonView pv = gameObject.GetComponent<PhotonView>();
-      //  if (!pv.IsMine)
-          //  return;
+        if (!pv.IsMine)
+            return;
         health -= amount;
         if (health <= 0f)
         {
