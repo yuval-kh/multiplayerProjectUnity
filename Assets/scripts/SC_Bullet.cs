@@ -68,7 +68,7 @@ public class SC_Bullet : MonoBehaviour
     {
         hasHit = true;
         yield return new WaitForSeconds(0.5f);
-        PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     //Set how much damage this bullet will deal

@@ -10,7 +10,7 @@ public class TakeWallDamage : MonoBehaviourPun,IDamageable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("damage " + damage);
+   //     Debug.Log("damage " + damage);
         health -= damage;
         if (health <= 0f)
         {
