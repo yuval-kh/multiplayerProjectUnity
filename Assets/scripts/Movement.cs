@@ -10,9 +10,11 @@ public class Movement : MonoBehaviour
     public GameObject _camera;
 
 
+
+
     private PhotonView pv;
 
-    void Start()
+    void Start()//HERE!!!
     {
         pv = GetComponent<PhotonView>();
         if (!pv.IsMine)
@@ -20,6 +22,7 @@ public class Movement : MonoBehaviour
             Destroy(GetComponentInChildren<CharacterController>());
             Destroy(GetComponentInChildren<Rigidbody>());
         }
+        EnemyManager.Instance.addPlayer(this.transform);
     }
 
     // Update is called once per frame
@@ -34,7 +37,21 @@ public class Movement : MonoBehaviour
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        Vector3 move = transform.right * x + transform.forward * z;
+
+
+
+
+
+
+        //Vector3 move = transform.right * x + transform.forward * z;
+
+
+
+        Vector3 move = transform.right * x + transform.up * -10 + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
+
+
+
+       
     }
 }

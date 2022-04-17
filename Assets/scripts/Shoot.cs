@@ -44,7 +44,8 @@ public class Shoot : MonoBehaviourPun
             if (pv.IsMine)
             {
                 Vector3 pos = transform.position;
-                Vector3 forward = camera.transform.forward;
+                Vector3 forward = transform.forward;
+                //  Vector3 forward = camera.transform.forward;
                 pv.RPC("shoot", RpcTarget.All,pos, forward);
                 //  shoot();
     }
@@ -72,7 +73,7 @@ private void shoot(Vector3 pos, Vector3 forward)
                 {
                     firePointPointerPosition = hit.point;
                 }
-                firePoint.LookAt(firePointPointerPosition);
+               // firePoint.LookAt(firePointPointerPosition);////////////////////////////////////////////
                 //Fire
                  pv.RPC("makeBulletToAll", RpcTarget.All,pos, firePoint.rotation, weaponDamage);
 /*                GameObject bulletObject = PhotonNetwork.Instantiate("Bullet", pos, firePoint.rotation);

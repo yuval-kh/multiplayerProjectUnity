@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.AI;
+
 public class MazeRenderer : MonoBehaviourPun
 {
 
@@ -28,6 +30,9 @@ public class MazeRenderer : MonoBehaviourPun
 
     private PhotonView pv;
 
+
+    public NavMeshSurface surface;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +42,9 @@ public class MazeRenderer : MonoBehaviourPun
         var maze = MazeGenerator.Generate(width, height,seed); //generates a 2D array of a maze (in my case its using Recursive Backtracker)
         Draw(maze);
 
+
+        surface.BuildNavMesh();
+
     }
 
 
@@ -44,8 +52,8 @@ public class MazeRenderer : MonoBehaviourPun
 
     private void Draw(WallState[,] maze)
     {
-         var floor = Instantiate(floorPrefab, transform);
-        floor.localScale = new Vector3(width, 1, height);
+       //  var floor = Instantiate(floorPrefab, transform);
+     //  floor.localScale = new Vector3(width, 1, height);
 
         for (int i = 0; i < width; ++i)
         {
@@ -59,6 +67,9 @@ public class MazeRenderer : MonoBehaviourPun
                     topWall.position = position + new Vector3(0, 0, size / 2);// the position of the wall 
                     topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);// the size of the wall
 
+                    TakeWallDamage dmg = topWall.GetComponent<TakeWallDamage>();
+                    dmg.AddSurface(this.surface);
+
                 }
 
                 if (cell.HasFlag(WallState.LEFT)) // draw left wall
@@ -67,6 +78,9 @@ public class MazeRenderer : MonoBehaviourPun
                     leftWall.position = position + new Vector3(-size / 2, 0, 0);
                     leftWall.localScale = new Vector3(size, leftWall.localScale.y, leftWall.localScale.z);
                     leftWall.eulerAngles = new Vector3(0, 90, 0);
+
+                    TakeWallDamage dmg = leftWall.GetComponent<TakeWallDamage>();
+                    dmg.AddSurface(this.surface);
                 }
 
                 if (i == width - 1) // draw the right part of the maze
@@ -77,6 +91,9 @@ public class MazeRenderer : MonoBehaviourPun
                         rightWall.position = position + new Vector3(+size / 2, 0, 0);
                         rightWall.localScale = new Vector3(size, rightWall.localScale.y, rightWall.localScale.z);
                         rightWall.eulerAngles = new Vector3(0, 90, 0);
+
+                        TakeWallDamage dmg = rightWall.GetComponent<TakeWallDamage>();
+                        dmg.AddSurface(this.surface);
                     }
                 }
 
@@ -87,6 +104,11 @@ public class MazeRenderer : MonoBehaviourPun
                         var bottomWall = Instantiate(wallPrefab, transform) as Transform;
                         bottomWall.position = position + new Vector3(0, 0, -size / 2);
                         bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
+
+
+                        TakeWallDamage dmg = bottomWall.GetComponent<TakeWallDamage>();
+                        dmg.AddSurface(this.surface);
+
                     }
                 }
             }

@@ -39,6 +39,7 @@ public class SC_Bullet : MonoBehaviour
           //          hit.rigidbody.AddForce(direction * hitForce);
 
                     IDamageable npc = hit.transform.GetComponent<IDamageable>();
+                Debug.Log(hit.transform);
                     if (npc != null)
                     {
                     //Apply damage to NPC

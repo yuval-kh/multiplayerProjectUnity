@@ -14,13 +14,15 @@ public class PlayerManager : MonoBehaviour
         pv = GetComponent<PhotonView>();
     }
 
-    private void Start()
+    private void Start()//HERE!!!!
     {
         spawnPoint = new Vector3(25, 0, -27);
         if (pv.IsMine) //every player creates only his own character.
         {
             CreateController();
         }
+
+    //    EnemyManager.Instance.addPlayer(this.transform);
     }
 
     private void CreateController()
