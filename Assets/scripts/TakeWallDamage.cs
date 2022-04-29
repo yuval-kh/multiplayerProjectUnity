@@ -19,7 +19,9 @@ public class TakeWallDamage : MonoBehaviourPun,IDamageable
         health -= damage;
         if (health <= 0f)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            onDisable();
+           // Destroy(gameObject);
         }
     }
     public void Die()
@@ -38,16 +40,52 @@ public class TakeWallDamage : MonoBehaviourPun,IDamageable
 
     void OnDestroy()
     {
+/*        if (surface == null)
+            return;
         GameObject []players = GameObject.FindGameObjectsWithTag("IgnoreNavBuild");// the objects with this tag always will be childern of the main object
         foreach (GameObject player in players)
         {
-            player.transform.parent.gameObject.SetActive(false);
+            if (player != null)
+            {
+                player.transform.parent.gameObject.SetActive(false);
+            }
         }
-        surface.BuildNavMesh();
+     //   if (surface != null)
+     //   {
+            surface.BuildNavMesh();///////////////HERE IS THE PROBLEM!!!!!!!
+     //   }
         foreach (GameObject player in players)
         {
-            player.transform.parent.gameObject.SetActive(true);
-        }
+            if (player != null)
+            {
+                player.transform.parent.gameObject.SetActive(true);
+            }
+        }*/
     }
 
+
+    void onDisable()
+    {
+        if (surface == null)
+            return;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("IgnoreNavBuild");// the objects with this tag always will be childern of the main object
+        foreach (GameObject player in players)
+        {
+            if (player != null)
+            {
+                player.transform.parent.gameObject.SetActive(false);
+            }
+        }
+        //   if (surface != null)
+        //   {
+        surface.BuildNavMesh();///////////////HERE IS THE PROBLEM!!!!!!!
+                               //   }
+        foreach (GameObject player in players)
+        {
+            if (player != null)
+            {
+                player.transform.parent.gameObject.SetActive(true);
+            }
+        }
+    }
 }

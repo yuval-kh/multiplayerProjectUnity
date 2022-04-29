@@ -20,14 +20,20 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()////HERE!!!
     {
-        spawnPoint = new Vector3(35, 0, -40);
-       Enemy = Instantiate(EnemyPrefab, spawnPoint, Quaternion.identity);
+        spawnPoint = new Vector3(35, 0, -40);////////////////AAAA////
+       // if (PhotonNetwork.IsMasterClient)
+      //  {
+      //      Enemy = PhotonNetwork.InstantiateRoomObject("Enemy", spawnPoint, Quaternion.identity);
+     //   }
+       Enemy = Instantiate (EnemyPrefab, spawnPoint, Quaternion.identity);///////////////////////AAA///////////
 /*        SC_NPCEnemy en = Enemy.GetComponent<SC_NPCEnemy>();
         en.addPlayer(PlayerTransform);*/
     }
 
     public void addPlayer(Transform PlayerTransform)
     {
+        //     if (!PhotonNetwork.IsMasterClient)
+        //        return;
         this.PlayerTransform = PlayerTransform;
         SC_NPCEnemy en = Enemy.GetComponent<SC_NPCEnemy>();
         en.addPlayer(PlayerTransform);

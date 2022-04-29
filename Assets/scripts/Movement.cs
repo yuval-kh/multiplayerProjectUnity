@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
             Destroy(GetComponentInChildren<CharacterController>());
             Destroy(GetComponentInChildren<Rigidbody>());
         }
-        EnemyManager.Instance.addPlayer(this.transform);
+        EnemyManager.Instance.addPlayer(this.transform);/////////////////////AAAAAAAAAAAAA//
     }
 
     // Update is called once per frame
