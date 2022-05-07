@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
         pv = GetComponent<PhotonView>();
     }
 
-    private void Start()//HERE!!!!
+    private void Start()
     {
         spawnPoint = new Vector3(25, 0, -27);
         if (pv.IsMine) //every player creates only his own character.
@@ -22,11 +22,10 @@ public class PlayerManager : MonoBehaviour
             CreateController();
         }
 
-    //    EnemyManager.Instance.addPlayer(this.transform);
     }
 
     private void CreateController()
     {
-        PhotonNetwork.Instantiate("Player", spawnPoint, Quaternion.identity); // PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player", spawnPoint, Quaternion.identity);
     }
 }

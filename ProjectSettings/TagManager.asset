@@ -14,13 +14,13 @@ TagManager:
   - UI
   - Weapon
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - FPSPlayer
+  - FPSGun
+  - TPSPlayer
+  - TPSGun
+  - Shootable
+  - Hidden
+  - Impact
   - 
   - 
   - 

@@ -39,6 +39,7 @@ public class Shoot : MonoBehaviourPun
     {
         if (Input.GetButtonDown("Fire1"))//was GetButton && Time.time >= nextFire)// if the player pressed to shoot and i can fire(depends on the gun fire rate)
         {
+            Debug.Log("SHOOTING");
             if (pv == null)
                 return;
             if (pv.IsMine)

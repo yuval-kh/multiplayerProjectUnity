@@ -15,13 +15,11 @@ public class TakeWallDamage : MonoBehaviourPun,IDamageable
 
     public void TakeDamage(float damage)
     {
-   //     Debug.Log("damage " + damage);
         health -= damage;
         if (health <= 0f)
         {
             gameObject.SetActive(false);
             onDisable();
-           // Destroy(gameObject);
         }
     }
     public void Die()
@@ -38,37 +36,13 @@ public class TakeWallDamage : MonoBehaviourPun,IDamageable
         this.surface = surface;
     }
 
-    void OnDestroy()
-    {
-/*        if (surface == null)
-            return;
-        GameObject []players = GameObject.FindGameObjectsWithTag("IgnoreNavBuild");// the objects with this tag always will be childern of the main object
-        foreach (GameObject player in players)
-        {
-            if (player != null)
-            {
-                player.transform.parent.gameObject.SetActive(false);
-            }
-        }
-     //   if (surface != null)
-     //   {
-            surface.BuildNavMesh();///////////////HERE IS THE PROBLEM!!!!!!!
-     //   }
-        foreach (GameObject player in players)
-        {
-            if (player != null)
-            {
-                player.transform.parent.gameObject.SetActive(true);
-            }
-        }*/
-    }
-
 
     void onDisable()
     {
         if (surface == null)
             return;
-        GameObject[] players = GameObject.FindGameObjectsWithTag("IgnoreNavBuild");// the objects with this tag always will be childern of the main object
+        // the objects with this tag always will be childern of the main object
+        GameObject[] players = GameObject.FindGameObjectsWithTag("IgnoreNavBuild");
         foreach (GameObject player in players)
         {
             if (player != null)
@@ -76,10 +50,7 @@ public class TakeWallDamage : MonoBehaviourPun,IDamageable
                 player.transform.parent.gameObject.SetActive(false);
             }
         }
-        //   if (surface != null)
-        //   {
-        surface.BuildNavMesh();///////////////HERE IS THE PROBLEM!!!!!!!
-                               //   }
+        surface.BuildNavMesh();
         foreach (GameObject player in players)
         {
             if (player != null)
