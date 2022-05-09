@@ -47,9 +47,21 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnLeftRoom();
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
+         //   ChatManager ch= GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
+         //   ch.AddMessage(photonView.Owner.NickName + "has left the room");
              DontDestroyOnLoad(this);
             PhotonNetwork.LoadLevel(2);
 
+        }
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player other)
+    {
+
+        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            ChatManager ch = GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
+            ch.AddMessage("Player " + other.NickName + " Left Game.");
         }
     }
 

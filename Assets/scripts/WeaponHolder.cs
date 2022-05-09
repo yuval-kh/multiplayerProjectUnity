@@ -2,19 +2,15 @@
 
 [RequireComponent(typeof(Animator))]
 
-public class AIKControl : MonoBehaviour {
+public class WeaponHolder : MonoBehaviour {
 
     [SerializeField]
-    private bool ikActive = false;
-    //[SerializeField]
+    private bool isActive = false;
+
     private Transform rightHandObj = null;
-   // [SerializeField]
     private Transform leftHandObj = null;
-  //  [SerializeField]
     private Transform rightElbowObj = null;
- //   [SerializeField]
     private Transform leftElbowObj = null;
-   // [SerializeField]
     private Transform lookObj = null;
 
 
@@ -44,7 +40,7 @@ public class AIKControl : MonoBehaviour {
             Debug.Log("error! IKPOINTS is not initialized for this weapon");
         foreach( Transform child in ikPoints.GetComponentInChildren<Transform>())
         {
-            Debug.Log(child.gameObject.name);
+          //  Debug.Log(child.gameObject.name);
             if (child.name == "RightHandHandle")
                 rightHandObj = child;
             if (child.name == "LeftHandHandle")
@@ -62,7 +58,7 @@ public class AIKControl : MonoBehaviour {
 
         // If the IK is active, set the position and rotation directly to the goal.
         // If the IK is not active, set the position and rotation of the hand and head back to the original position.
-        if (ikActive) {
+        if (isActive) {
             // Set the look target position, if one has been assigned.
             if (lookObj != null) {
                 animator.SetLookAtWeight(1);

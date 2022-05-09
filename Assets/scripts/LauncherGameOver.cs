@@ -5,6 +5,8 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using System.Linq;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LauncherGameOver : MonoBehaviourPunCallbacks
 {
@@ -21,8 +23,18 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     [SerializeField] GameObject playerListItemPrefab;
     [SerializeField] GameObject startGameButton;
 
+
+    [SerializeField]
+    private InputField messagesLog;
+
+
+
+
     public static int reloadedNum = 0;
 
+
+    private Queue<string> messages;
+    private const int messageCount = 10;
 
 
     private void Awake()
@@ -31,8 +43,24 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     }
 
 
+
+/*    private void Update()
+    {
+        AddMessage("hi");
+    }
+*/
+
+
+
+
+
+
     private void Start()
     {
+    //    messages = new Queue<string>(messageCount);
+
+
+
         if (reloadedNum == 0)
         {
             menuManager.Instance.OpenMenu("title");
@@ -57,10 +85,10 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     }
 
     // Update is called once per frame
-    void Update()
-    {
+ //   void Update()
+ //   {
         
-    }
+   // }
     public void GoToMainMenu()
     {
         Debug.Log("Start game method in the script LauncherGameOver :-)");
@@ -180,7 +208,38 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     }
 
 
+/*    void AddMessage(string message)
+    {
+        if (!SceneManager.GetActiveScene().name.Equals("Game"))
+            return;
+        messagesLog = GameObject.Find("Canvas").transform.Find("MessagePanel")
+              .Find("MessagesInputField").gameObject.GetComponent(typeof(InputField)) as InputField;
+        if (messagesLog == null)
+            Debug.Log("messagelog is null");
+        else
+            Debug.Log("messagelog is not null");
+     
+        photonView.RPC("AddMessage_RPC", RpcTarget.All, message);
+    }
 
+    /// <summary>
+    /// RPC function to call add message for each client.
+    /// </summary>
+    /// <param name="message">The message that we want to add.</param>
+    [PunRPC]
+    void AddMessage_RPC(string message)
+    {
+        messages.Enqueue(message);
+        if (messages.Count > messageCount)
+        {
+            messages.Dequeue();
+        }
+        messagesLog.text = "";
+        foreach (string m in messages)
+        {
+            messagesLog.text += m + "\n";
+        }
+    }*/
 
     public void QuitGame()
     {

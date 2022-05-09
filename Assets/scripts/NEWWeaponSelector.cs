@@ -74,10 +74,21 @@ public class NEWWeaponSelector : MonoBehaviourPun
             int i = 0;
             foreach (Transform weapon in transform)
             {
+                Shoot sht = weapon.gameObject.GetComponent<Shoot>();
                 if (i == selectedWeapon)
-                    weapon.gameObject.SetActive(true);
+                {
+                    if (sht == null)
+                        weapon.gameObject.SetActive(true);
+                    else
+                        sht.ActivateWeapon(true);
+                }
                 else
-                    weapon.gameObject.SetActive(false);
+                {
+                    if (sht == null)
+                        weapon.gameObject.SetActive(false);
+                    else
+                        sht.ActivateWeapon(false);
+                }
                 i++;
             }
         }
@@ -85,7 +96,11 @@ public class NEWWeaponSelector : MonoBehaviourPun
         {
             foreach (Transform weapon in transform)
             {
-                weapon.gameObject.SetActive(false);
+                Shoot sht = weapon.gameObject.GetComponent<Shoot>();
+                if (sht == null)
+                    weapon.gameObject.SetActive(false);
+                else
+                    sht.ActivateWeapon(false);
             }
         }
 
