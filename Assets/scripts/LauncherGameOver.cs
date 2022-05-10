@@ -208,38 +208,14 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     }
 
 
-/*    void AddMessage(string message)
+
+
+    public void goToFreeRoam()
     {
-        if (!SceneManager.GetActiveScene().name.Equals("Game"))
-            return;
-        messagesLog = GameObject.Find("Canvas").transform.Find("MessagePanel")
-              .Find("MessagesInputField").gameObject.GetComponent(typeof(InputField)) as InputField;
-        if (messagesLog == null)
-            Debug.Log("messagelog is null");
-        else
-            Debug.Log("messagelog is not null");
-     
-        photonView.RPC("AddMessage_RPC", RpcTarget.All, message);
+      //  PhotonNetwork.OfflineMode = true;
+        SceneManager.LoadScene("FreeRoam");
     }
 
-    /// <summary>
-    /// RPC function to call add message for each client.
-    /// </summary>
-    /// <param name="message">The message that we want to add.</param>
-    [PunRPC]
-    void AddMessage_RPC(string message)
-    {
-        messages.Enqueue(message);
-        if (messages.Count > messageCount)
-        {
-            messages.Dequeue();
-        }
-        messagesLog.text = "";
-        foreach (string m in messages)
-        {
-            messagesLog.text += m + "\n";
-        }
-    }*/
 
     public void QuitGame()
     {

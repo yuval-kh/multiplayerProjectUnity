@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 9f803a69e11e564469f745a422c4e894
+  - enabled: 1
+    path: Assets/Scenes/FreeRoam.unity
+    guid: dd79746c8912f4a43862b130b438903c
   m_configObjects: {}

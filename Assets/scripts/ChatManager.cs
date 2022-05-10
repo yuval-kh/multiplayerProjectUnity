@@ -72,7 +72,6 @@ public class ChatManager : MonoBehaviour
     {
         pv = GetComponent<PhotonView>();
         string myname =  PhotonNetwork.LocalPlayer.NickName;
-       
         Event e = Event.current;
         //e.type == EventType.KeyDown && e.keyCode.ToString().Length == 1 &&char.IsLetter(e.keyCode.ToString()[0])
         if (e.type == EventType.KeyDown && e.isKey)// && e.keyCode.ToString().Length == 1)
@@ -85,13 +84,13 @@ public class ChatManager : MonoBehaviour
             }
             else if (isPressed )
             {
-                if (messageChat.Equals("") && e.keyCode == KeyCode.T)
-                    return;
+
                 if (e.keyCode >= KeyCode.A && e.keyCode <= KeyCode.Z 
                     || e.keyCode >= KeyCode.Keypad0 && e.keyCode <= KeyCode.Keypad9 
                     || e.keyCode == KeyCode.Space
                     || e.keyCode >= KeyCode.Alpha0 && e.keyCode <= KeyCode.Alpha9)
                 {
+
                     char letter;
                     if (e.keyCode == KeyCode.Space)
                         letter = ' ';
