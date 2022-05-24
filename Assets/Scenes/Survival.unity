@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 331053102}
   - component: {fileID: 331053101}
   m_Layer: 0
-  m_Name: FreeRoamEnemyMaker
+  m_Name: SurvivalEnemyMaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,12 +341,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 331053100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bda4b44f178aaa4d8f804fa1cde4277, type: 3}
+  m_Script: {fileID: 11500000, guid: 9070778c618e3f64aab7840465af6ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 3803431396737150512, guid: a5707ea77fbe82649a97e3d205f59a38, type: 3}
+  EnemyPrefab: {fileID: 3803431396737150512, guid: 670e1f667db833b41beeb17d9753f511, type: 3}
   PlayerTransform: {fileID: 1610870182}
   bias: {x: 0, y: 1, z: 1}
+  spawnInterval: 2
 --- !u!4 &331053102
 Transform:
   m_ObjectHideFlags: 0
@@ -501,6 +502,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &836749273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 836749274}
+  m_Layer: 0
+  m_Name: IgnoreOnNavBuild
+  m_TagString: IgnoreNavBuild
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &836749274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836749273}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.072, z: -3.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1610870182}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1431021580
 GameObject:
@@ -770,6 +801,7 @@ Transform:
   m_Children:
   - {fileID: 9180855870335517381}
   - {fileID: 1610810564}
+  - {fileID: 836749274}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2349,7 +2381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &2931571154573832280
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -216,6 +216,15 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("FreeRoam");
     }
 
+    public void goToSurvival()
+    {
+        //  PhotonNetwork.OfflineMode = true;
+        SceneManager.LoadScene("Survival");
+    }
+
+
+
+
 
     public void QuitGame()
     {

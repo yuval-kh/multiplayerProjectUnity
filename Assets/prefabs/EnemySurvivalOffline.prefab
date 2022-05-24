@@ -202,13 +202,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2321435428199807292}
   - component: {fileID: 2909493400169758485}
-  - component: {fileID: 3443349865437466789}
   - component: {fileID: 7490193116919146728}
   - component: {fileID: 905250448047583096}
   - component: {fileID: 596113431529892693}
-  - component: {fileID: 4723533309020935797}
+  - component: {fileID: -6079871567788717497}
   m_Layer: 0
-  m_Name: EnemyOffline
+  m_Name: EnemySurvivalOffline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,25 +252,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3443349865437466789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3803431396737150512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c18324a51d3054e8fc592a0503ddff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDistance: 3
-  movementSpeed: 4
-  npcHP: 100
-  npcDamage: 100
-  attackRate: 0.5
-  firePoint: {fileID: 7041915535764605135}
-  npcDeadPrefab: {fileID: 6374475599110489727, guid: a4105e00caccceb4a83f24c43e9708ae, type: 3}
 --- !u!114 &7490193116919146728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +259,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3803431396737150512}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2bd5d4c963f12f42a5ce982d8b21bda, type: 3}
   m_Name: 
@@ -291,8 +271,8 @@ MonoBehaviour:
   attackRate: 0.5
   firePoint: {fileID: 7041915535764605135}
   npcDeadPrefab: {fileID: 6374475599110489727, guid: a4105e00caccceb4a83f24c43e9708ae, type: 3}
-  isActivateAtDist: 0
-  activateDistance: 0
+  isActivateAtDist: 1
+  activateDistance: 2
 --- !u!54 &905250448047583096
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -322,7 +302,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4723533309020935797
+--- !u!114 &-6079871567788717497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,18 +311,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3803431396737150512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483997926d213a34c9582223b0798654, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f2599543c4255c40ad9ff23d5a903a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 3
-  movementSpeed: 4
-  npcHP: 100
-  npcDamage: 5
-  attackRate: 0.5
-  firePoint: {fileID: 0}
-  npcDeadPrefab: {fileID: 0}
-  isActivateAtDist: 0
-  activateDistance: 0
 --- !u!1 &6119073495747824648
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +357,7 @@ GameObject:
   - component: {fileID: 2722398569355067376}
   - component: {fileID: 7152255757851997826}
   - component: {fileID: 7714707723909427260}
+  - component: {fileID: 6248223411589627793}
   m_Layer: 0
   m_Name: EnemyBody
   m_TagString: Untagged
@@ -488,6 +460,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6248223411589627793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6697561071157000789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfb0492aa8a0bc4f93b01d1ae1df5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8953442721125428110
 GameObject:
   m_ObjectHideFlags: 0

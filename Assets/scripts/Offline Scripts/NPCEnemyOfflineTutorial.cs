@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
-public class NPCEnemyOffline : MonoBehaviour, IDamageable
+public class NPCEnemyOfflineTutorial : MonoBehaviour, IDamageable
 {
     public float attackDistance = 3f;
     public float movementSpeed = 4f;
@@ -43,29 +43,16 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
         Transform childTransform = this.gameObject.transform.GetChild(0).GetComponent<Transform>();
         childTransform.position = this.transform.position;
 
-   //     isActivateAtDist = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         agent.destination = player.position;
-        /////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?////////////////////////
-        //isActivateAtDist = true;
         var navMesh = this.GetComponent<NavMeshAgent>();
-        //Debug.Log("The activateDistance is: " + activateDistance);
-        //Debug.Log("The remaining distance is: " + agent.remainingDistance);
-        //Debug.Log("is activate at dist: " + isActivateAtDist);
         if (agent.remainingDistance == 0)
             return;
-        if (isActivateAtDist && agent.remainingDistance >= activateDistance )
-        {
 
-            navMesh.isStopped = true;
-     //       Debug.Log("dont move");
-            return;
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////
         navMesh.isStopped = false;
         isActivateAtDist = false;
 
@@ -77,25 +64,7 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
         if (agent.remainingDistance - attackDistance < 0.01f)
         {
             transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.position.z));
-            if (Time.time > nextAttackTime)
-            {
 
-                nextAttackTime = Time.time + attackRate;
-
-                //Attack
-                RaycastHit hit;
-                if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, attackDistance))
-                {
-                    if (hit.transform.CompareTag("Player"))
-                    {
-                        Debug.DrawLine(firePoint.position, firePoint.position + firePoint.forward * attackDistance, Color.cyan);
-
-                        IDamageable playerScript = hit.transform.GetComponent<IDamageable>();
-                        Debug.Log("Damage to player");
-                        // playerScript.TakeDamage(npcDamage);
-                    }
-                }
-            }
         }
         //Move towards he player
         agent.destination = player.position;
@@ -109,15 +78,6 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
         if(npcHP <= 0)
         {
             Debug.Log("NPC dead");
-            //HERE THE LAST CHANGES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111111111111111111111111
-            var enemyManagerSurvival = transform.GetComponent<UpdateEnemyManagerSurvival>();
-            if (enemyManagerSurvival != null)
-            {
-                Debug.Log("in the if");
-                enemyManagerSurvival.DeadUpdate();
-            }
-
-            //HERE THE LAST CHANGES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111111111111111111111111
             
                 
                 

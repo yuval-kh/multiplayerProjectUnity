@@ -31,8 +31,11 @@ public class EnemyManagerFreeRoam : MonoBehaviour
                 Debug.Log("PlayerTransform  somehow is null :-(");
             Debug.Log("pressed I");
             Enemy = Instantiate(EnemyPrefab, PlayerTransform.position + bias, Quaternion.identity);
-            var en = Enemy.GetComponent<SC_NPCEnemy>();
-            en.addPlayer(PlayerTransform);
+               // var en = Enemy.GetComponent<SC_NPCEnemy>();
+             //   en.addPlayer(PlayerTransform);
+            var en = Enemy.GetComponent<NPCEnemyOffline>();
+            en.isActivateAtDist = false;
+
         }
     }
 
