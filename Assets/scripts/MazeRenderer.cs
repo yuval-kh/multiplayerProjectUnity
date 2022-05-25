@@ -42,8 +42,10 @@ public class MazeRenderer : MonoBehaviourPun
         var maze = MazeGenerator.Generate(width, height,seed); //generates a 2D array of a maze (in my case its using Recursive Backtracker)
         Draw(maze);
 
-
-        surface.BuildNavMesh();
+        if (surface != null)
+        {
+            surface.BuildNavMesh();
+        }
 
     }
 

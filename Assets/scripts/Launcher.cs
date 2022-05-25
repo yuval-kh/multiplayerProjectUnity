@@ -80,9 +80,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel(2);
             Destroy(this);
             return;
-            Debug.Log("i hope i wont see this");
-            menuManager.Instance.OpenMenu("title");
-            playerNameInputField.text = "";
+
         }
         else
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RandomLocationGenerator : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class RandomLocationGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            return;
+
+
+
+
+
         var maze = GameObject.Find("MazeRenderer");
         minX = minY = minZ = 9999;
         maxX = maxY = maxZ = -9999;

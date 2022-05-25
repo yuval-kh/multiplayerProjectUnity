@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.buildIndex == 1)
+        if (scene.buildIndex == 1 || scene.buildIndex == 5)///////////////////////////111111111111!!!!!!!!!!
         {
 
             // This is the game scene
@@ -45,7 +45,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("oneleftRoomFunction");
         base.OnLeftRoom();
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 5)///////!!!1111
         {
          //   ChatManager ch= GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
          //   ch.AddMessage(photonView.Owner.NickName + "has left the room");
@@ -59,6 +59,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
 
         if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            ChatManager ch = GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
+            ch.AddMessage("Player " + other.NickName + " Left Game.");
+        }
+        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().buildIndex == 5)/////!!!!!!!1111111
         {
             ChatManager ch = GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
             ch.AddMessage("Player " + other.NickName + " Left Game.");

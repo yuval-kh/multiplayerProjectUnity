@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Survival.unity
     guid: 2ac5a1b9b4602bc41a09f694a2179167
+  - enabled: 1
+    path: Assets/Scenes/multiplayerNoEnemies.unity
+    guid: f446e53be173972468ea42315bb4fb65
   m_configObjects: {}
