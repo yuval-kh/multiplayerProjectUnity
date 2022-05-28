@@ -26,8 +26,10 @@ public class playerDamage : MonoBehaviourPun, IDamageable
 
         if (Input.GetKey(KeyCode.M)) // will work only if im the last player left.
         {
-          //  Debug.Log("pressed m");
-            Die();
+            PhotonView pv = gameObject.GetComponent<PhotonView>();
+            if (pv.IsMine)
+                Die();
+            //  Debug.Log("pressed m");
 
         }
     }
@@ -50,6 +52,16 @@ public class playerDamage : MonoBehaviourPun, IDamageable
       //  Debug.Log("DIE");
         Movement movement = gameObject.GetComponent<Movement>();
         PhotonView pv = gameObject.GetComponent<PhotonView>();
+        ////////////////////////
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            var list = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in list)
+            {
+                enemy.SetActive( false);
+            }
+        }
+        ////////////////////////
         if (movement != null)
         {
             if (pv == null)

@@ -33,13 +33,22 @@ public class MazeRenderer : MonoBehaviourPun
 
     public NavMeshSurface surface;
 
+    /// <summary>
+    private Vector3[,] locationsList;
+    /// </summary>
+
     // Start is called before the first frame update
     void Start()
     {
+        ////
+        locationsList = new Vector3[width,height];
+       // locationsList = new List<Vector3>();
+        /////
+
         int seed = (int)PhotonNetwork.CurrentRoom.CustomProperties["seed"];
         Debug.Log("The seed is " + seed);
         pv = GetComponent<PhotonView>();
-        var maze = MazeGenerator.Generate(width, height,seed); //generates a 2D array of a maze (in my case its using Recursive Backtracker)
+        var maze = MazeGenerator.Generate(width, height, seed); //generates a 2D array of a maze (in my case its using Recursive Backtracker)
         Draw(maze);
 
         if (surface != null)
@@ -54,8 +63,8 @@ public class MazeRenderer : MonoBehaviourPun
 
     private void Draw(WallState[,] maze)
     {
-       //  var floor = Instantiate(floorPrefab, transform);
-     //  floor.localScale = new Vector3(width, 1, height);
+        //  var floor = Instantiate(floorPrefab, transform);
+        //  floor.localScale = new Vector3(width, 1, height);
 
         for (int i = 0; i < width; ++i)
         {
@@ -63,6 +72,10 @@ public class MazeRenderer : MonoBehaviourPun
             {
                 var cell = maze[i, j];
                 var position = new Vector3(-width / 2 + i, Upbias, -height / 2 + j); // the position of the the cell
+                //////
+                locationsList[i, j] = position;
+              ///  locationsList.Add(position);
+                //////
                 if (cell.HasFlag(WallState.UP)) // draw up wall of the cell
                 {
                     var topWall = Instantiate(wallPrefab, transform) as Transform;
@@ -119,4 +132,8 @@ public class MazeRenderer : MonoBehaviourPun
 
     }
 
+    public Vector3[,] getLocations()
+    {
+        return locationsList.Clone() as Vector3[,];
+    }
 }

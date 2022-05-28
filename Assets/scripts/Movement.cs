@@ -17,6 +17,29 @@ public class Movement : MonoBehaviour
     void Start()//HERE!!!
     {
         pv = GetComponent<PhotonView>();
+        //////////////////////////
+/*        if (pv.IsMine)
+        {
+            GameObject obj = GameObject.Find("LocationGenerator");
+            var scr = obj.GetComponent<LocationGenerator>();
+            if (scr != null )
+            {
+                int counter = 0;
+                float x = transform.position.x;
+                while(transform.position.y > scr.getFloorHeight() + 1)
+                {
+                    x += 0.2f;
+                    Debug.Log("the new x is : " + x);
+                    counter++;
+                    if (counter > 100)
+                        break;
+                }
+            }
+        }
+*/
+
+
+        ///////////////////////////
         if (!pv.IsMine)
         {
             Destroy(GetComponentInChildren<CharacterController>());

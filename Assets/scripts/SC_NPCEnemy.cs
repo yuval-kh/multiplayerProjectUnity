@@ -21,9 +21,23 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
     float nextAttackTime = 0;
     private List<Transform> players;
 
+
+
+    ////////////
+    int myCounter;
+    bool isCalled;
+    bool willDie;
+    /////////////
+
     // Start is called before the first frame update
     void Start()
     {
+        ////////////////
+        isCalled = false;
+        willDie = false;
+        ////////////////
+        
+
         players = new List<Transform>();
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackDistance;
@@ -45,6 +59,11 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
         if (agent == null || players == null || !players.Any())
             return;
         updateList();
+        if (willDie)
+        {
+            return;
+            //updateList();
+        }
         float closestDist = Vector3.Distance(agent.transform.position, players[0].position);
         Transform minPlayer = players[0];
         foreach (var player in players)
@@ -87,31 +106,63 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
     }
 
 
-        public void TakeDamage(float damage)//HERE!!!!
+        public void TakeDamage(float damage)
     {
         Debug.Log("NPC Took Damage");
         npcHP -= damage;
         if(npcHP <= 0)
         {
+            willDie = true;
+            ///////////////
+            if(EnemyManager.Instance != null && !isCalled)
+            {
+                isCalled = true;
+                EnemyManager.Instance.deleteNpcNum(getMyCounter());
+                return;
+            }
+
+
+            //////////////
+
+
+
+
             //Destroy the NPC
             GameObject npcDead = Instantiate(npcDeadPrefab, transform.position, transform.rotation);
             //Slightly bounce the npc dead prefab up
             Destroy(npcDead, 10);
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);/////////!!!111111111111
         }
     }
     public void updateList()
     {
-        foreach (Transform player in players)
-        {
-            if (player == null)
-            {
-                players.RemoveAll(player => player == null);
-            }
-        }
+        players.RemoveAll(player => player == null);
+        /* foreach (Transform player in players.ToList())
+         {
+             if (willDie)
+                 return;
+             if (players != null )
+             {
+                 if (player == null)
+                 {
+                     players.RemoveAll(player => player == null);
+                 }
+             }
+         }*/
     }
     public void addPlayer(Transform PlayerTransform)
     {
         players.Add(PlayerTransform);
+    }
+
+    /////////////////////
+    ///
+    public void setMyCounter(int counter)
+    {
+        this.myCounter = counter;
+    }
+    public int getMyCounter()
+    {
+        return this.myCounter;
     }
 }

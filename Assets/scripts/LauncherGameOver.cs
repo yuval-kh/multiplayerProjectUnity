@@ -69,7 +69,8 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.JoinLobby();
+
+    //    PhotonNetwork.JoinLobby();////////////////////!!!!!!!!!!!!!!1
     }
 
     public override void OnConnectedToMaster()
@@ -205,7 +206,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         // 1 is used as the build index of the game scene, defined in the build settings
         // Use this instead of scene management so that *everyone* in the lobby goes into this scene
         // here i can insert 5 instead of 1 to build the multiplayer without enemies mode.
-        PhotonNetwork.LoadLevel(1);///!!!!!!!!!!!!!1111111111111111
+        PhotonNetwork.LoadLevel(5);
     }
 
 

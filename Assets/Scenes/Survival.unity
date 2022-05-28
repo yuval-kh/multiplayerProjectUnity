@@ -564,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 3803431396737150512, guid: 9089f5bbd3df52e44b61728e2dbdfe4d, type: 3}
   spawnPoint: {x: 50, y: 0, z: -27}
+  deleteScript: {fileID: 0}
 --- !u!4 &1431021582
 Transform:
   m_ObjectHideFlags: 0
@@ -677,8 +678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81496bfdd164a894f9df4362de6e672b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 50
-  height: 50
+  width: 5
+  height: 5
   size: 1
   wallPrefab: {fileID: 3495958046185666090, guid: 617d16f0c0301fe4f97277506780d325, type: 3}
   floorPrefab: {fileID: 634900085634603167, guid: c2536af29a86e154f82a0b8789b78493, type: 3}

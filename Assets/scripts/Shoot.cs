@@ -89,6 +89,8 @@ private void Fire()
 [PunRPC]
 private void shoot(Vector3 pos, Vector3 forward)
 {
+        if (pv == null)
+            return;
         if (!pv.IsMine)
             return;
         if (!canFire)
