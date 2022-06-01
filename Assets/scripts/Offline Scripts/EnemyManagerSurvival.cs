@@ -7,7 +7,7 @@ public class EnemyManagerSurvival : MonoBehaviour
 {
     public static EnemyManagerSurvival Instance;
     public GameObject EnemyPrefab;
-    public Transform PlayerTransform;
+  //  public Transform PlayerTransform;
     public Vector3 bias;
     //public Vector3 spawnPoint ;
     GameObject Enemy;
@@ -28,6 +28,10 @@ public class EnemyManagerSurvival : MonoBehaviour
     float minY, maxY;
     float minZ, maxZ;
 
+
+
+    [SerializeField]
+    EnemyManager manager;
 
     private void Awake()
     {
@@ -88,13 +92,34 @@ public class EnemyManagerSurvival : MonoBehaviour
                     //Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
                     Vector3 randomPosition = generateRandomPoint();
 
-                    GameObject enemy = Instantiate(EnemyPrefab, randomPosition, Quaternion.identity);
-                    var script = enemy.GetComponent<NPCEnemyOffline>();
+
+                GameObject enemy;
+                if (manager != null)
+                {
+                    enemy =manager.makeEnemy(randomPosition);
+                }
+                else {
+
+
+
+
+                    enemy = Instantiate(EnemyPrefab, randomPosition, Quaternion.identity); }
+                    var script = enemy.GetComponent<SC_NPCEnemy>();
+                if (script != null)
+                {
                     script.isActivateAtDist = true;
                     script.activateDistance = 2;
+                }
+                else
+                {
+                    var scriptOffline = enemy.GetComponent<NPCEnemyOffline>();
+                    scriptOffline.isActivateAtDist = true;
+                    scriptOffline.activateDistance = 2;
+
+                }
                 //    var npc = enemy.GetComponent<UpdateEnemyManagerSurvival>();
-             //       npc.enemyManager = this;
-                    totalEnemiesSpawned++;
+                //       npc.enemyManager = this;
+                totalEnemiesSpawned++;
                 }
           //  }
         }
@@ -128,10 +153,21 @@ public class EnemyManagerSurvival : MonoBehaviour
 
     private Vector3 generateRandomPoint()
     {
-        float rndX = Random.Range(minX, maxX);
-        float y = PlayerTransform.position.y; // the y should not be random its the floor of the level here
-        float rndZ = Random.Range(minZ, maxZ);
-        return new Vector3(rndX, y, rndZ);
+
+
+  //      float rndX = Random.Range(minX, maxX);
+        var locationGenerator = GameObject.Find("LocationGenerator");
+        
+        //if (locationGenerator != null)
+        //{
+            var sc = locationGenerator.GetComponent<LocationGenerator>();
+        var result =  sc.generateRandomVector();
+        return result;
+   //         float y = sc.getFloorHeight();
+        //}
+      //    float y = PlayerTransform.position.y; // the y should not be random its the floor of the level here
+      //  float rndZ = Random.Range(minZ, maxZ);
+     //   return new Vector3(rndX, y, rndZ);
     }
 
     public void EnemyEliminated()

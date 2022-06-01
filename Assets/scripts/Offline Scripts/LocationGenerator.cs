@@ -78,14 +78,29 @@ public class LocationGenerator : MonoBehaviour
     {
         if (!isSameToAll)
         {
+            return generateRandomVector();
+        }
+        else return SamePosition;
+    }
+
+    public Vector3 generateRandomVector()
+    {
             var maze = GameObject.Find("MazeRenderer");
             var scr = maze.GetComponent<MazeRenderer>();
-            var lst = scr.getLocations();
+        Vector3[,] lst;
+        if (scr != null)
+        {
+            lst = scr.getLocations();
+        }
+        else
+        {
+            var scrOffline = maze.GetComponent<MazeRendererOffline>();
+            lst = scrOffline.getLocations();
+        }
             int rndi = Random.Range(0, lst.GetLength(0));
             int rndj = Random.Range(0, lst.GetLength(1));
             return lst[rndi, rndj];
-        }
-        else return SamePosition;
+
     }
     public float getFloorHeight()
     {

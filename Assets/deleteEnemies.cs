@@ -25,6 +25,10 @@ public class deleteEnemies : MonoBehaviour
     [PunRPC]
     public void deleteEnemytoAll(int num)
     {
+        EnemyManagerSurvival.Instance.EnemyEliminated();
+
+
+
         Debug.Log(" i have to delete the " + num + "enemy");
         var list = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(var enemy in list)

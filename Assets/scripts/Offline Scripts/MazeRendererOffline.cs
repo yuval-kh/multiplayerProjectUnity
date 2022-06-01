@@ -30,10 +30,12 @@ public class MazeRendererOffline : MonoBehaviour
 
 
     public NavMeshSurface surface;
+    private Vector3[,] locationsList;
 
     // Start is called before the first frame update
     void Start()
     {
+        locationsList = new Vector3[width, height];
         int seed = Random.Range(1, 10000);
         Debug.Log("The seed is " + seed);
         var maze = MazeGenerator.Generate(width, height,seed); //generates a 2D array of a maze (in my case its using Recursive Backtracker)
@@ -58,6 +60,7 @@ public class MazeRendererOffline : MonoBehaviour
             {
                 var cell = maze[i, j];
                 var position = new Vector3(-width / 2 + i, Upbias, -height / 2 + j); // the position of the the cell
+                locationsList[i, j] = position;
                 if (cell.HasFlag(WallState.UP)) // draw up wall of the cell
                 {
                     var topWall = Instantiate(wallPrefab, transform) as Transform;
@@ -112,6 +115,10 @@ public class MazeRendererOffline : MonoBehaviour
 
         }
 
+    }
+    public Vector3[,] getLocations()
+    {
+        return locationsList.Clone() as Vector3[,];
     }
 
 }

@@ -202,14 +202,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2321435428199807292}
   - component: {fileID: 2909493400169758485}
-  - component: {fileID: 3443349865437466789}
+  - component: {fileID: -4242857459045813044}
   - component: {fileID: 905250448047583096}
   - component: {fileID: 596113431529892693}
-  - component: {fileID: 801262718818503642}
-  - component: {fileID: -3017834443638573550}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Enemy
+  m_Name: EnemySurvival
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +251,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3443349865437466789
+--- !u!114 &-4242857459045813044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,16 +260,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3803431396737150512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c18324a51d3054e8fc592a0503ddff, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b30f981e4a36474e977c48d48069e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackDistance: 3
   movementSpeed: 4
   npcHP: 100
-  npcDamage: 100
+  npcDamage: 5
   attackRate: 0.5
   firePoint: {fileID: 7041915535764605135}
   npcDeadPrefab: {fileID: 6374475599110489727, guid: a4105e00caccceb4a83f24c43e9708ae, type: 3}
+  isActivateAtDist: 1
+  activateDistance: 2
 --- !u!54 &905250448047583096
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -301,34 +301,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &801262718818503642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3803431396737150512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
---- !u!114 &-3017834443638573550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3803431396737150512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 563743933a2d58c4dbf4a76162111df1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6119073495747824648
 GameObject:
   m_ObjectHideFlags: 0
