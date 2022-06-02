@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 61559
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 99c696ac9ed6c1a478b8fcff24ee07ba, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0b054267446b9334b880646f36f11764, type: 2}
 --- !u!4 &61123444
 Transform:
   m_ObjectHideFlags: 0
@@ -533,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 3803431396737150512, guid: 9089f5bbd3df52e44b61728e2dbdfe4d, type: 3}
   spawnPoint: {x: 50, y: 0, z: -27}
+  deleteScript: {fileID: 0}
 --- !u!4 &1431021582
 Transform:
   m_ObjectHideFlags: 0
@@ -765,7 +766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611134902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.72}
+  m_LocalPosition: {x: 0, y: -0.44, z: 1.72}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 9180855870335517381}

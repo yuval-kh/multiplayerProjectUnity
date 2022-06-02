@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - IgnoreNavBuild
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Shootable
   - Hidden
   - Impact
-  - 
+  - player
   - 
   - 
   - 

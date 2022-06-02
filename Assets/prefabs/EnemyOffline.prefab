@@ -272,6 +272,8 @@ MonoBehaviour:
   attackRate: 0.5
   firePoint: {fileID: 7041915535764605135}
   npcDeadPrefab: {fileID: 6374475599110489727, guid: a4105e00caccceb4a83f24c43e9708ae, type: 3}
+  isActivateAtDist: 0
+  activateDistance: 0
 --- !u!114 &7490193116919146728
 MonoBehaviour:
   m_ObjectHideFlags: 0
