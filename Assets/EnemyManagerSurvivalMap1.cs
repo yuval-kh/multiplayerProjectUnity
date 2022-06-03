@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class EnemyManagerSurvival : MonoBehaviour
+public class EnemyManagerSurvivalMap1 : MonoBehaviour
 {
-    public static EnemyManagerSurvival Instance;
+    public static EnemyManagerSurvivalMap1 Instance;
     public GameObject EnemyPrefab;
   //  public Transform PlayerTransform;
     public Vector3 bias;
@@ -130,8 +130,6 @@ public class EnemyManagerSurvival : MonoBehaviour
 
 
         var maze = GameObject.Find("MazeRenderer");
-        if (maze == null)
-            return;
         minX = minY = minZ = 9999;
         maxX = maxY = maxZ = -9999;
         foreach (Transform child in maze.transform)

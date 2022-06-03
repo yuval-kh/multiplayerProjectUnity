@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.buildIndex == 1 || scene.buildIndex == 5)
+        if (scene.buildIndex == 1 || scene.buildIndex == 5 || scene.buildIndex == 6 || scene.buildIndex == 7)
         {
 
             // This is the game scene
@@ -45,7 +45,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("oneleftRoomFunction");
         base.OnLeftRoom();
-        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 5)
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 5 
+            || SceneManager.GetActiveScene().buildIndex == 6 || SceneManager.GetActiveScene().buildIndex == 7)
         {
          //   ChatManager ch= GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
          //   ch.AddMessage(photonView.Owner.NickName + "has left the room");
@@ -64,6 +65,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
             ch.AddMessage("Player " + other.NickName + " Left Game.");
         }
         if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            ChatManager ch = GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
+            ch.AddMessage("Player " + other.NickName + " Left Game.");
+        }
+        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().buildIndex == 6)
+        {
+            ChatManager ch = GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
+            ch.AddMessage("Player " + other.NickName + " Left Game.");
+        }
+        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().buildIndex == 7)
         {
             ChatManager ch = GameObject.Find("Canvas").transform.Find("MessagePanel").GetComponent<ChatManager>();
             ch.AddMessage("Player " + other.NickName + " Left Game.");

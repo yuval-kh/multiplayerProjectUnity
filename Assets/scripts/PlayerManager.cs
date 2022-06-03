@@ -18,35 +18,18 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         GameObject obj = GameObject.Find("LocationGenerator");
-        if(obj != null)
+        if (obj != null)
         {
-        int counter = 0;
-        var scr = obj.GetComponent<LocationGenerator>();
-            /*bool isRightLocation = false;
-            while (!isRightLocation && counter < 100)
+            int counter = 0;
+            var scr = obj.GetComponent<LocationGenerator>();
+            if (scr != null)
             {
                 spawnPoint = scr.generateLocation();
-                Collider[] hitColliders = Physics.OverlapSphere(spawnPoint, 3f);
-                counter++;
-                if (hitColliders.Length == 0)
-                    isRightLocation = true;
-                Debug.Log(counter + " " + hitColliders.Length);
-                //   if (hitColliders.Length == 1) { 
-                foreach (var col in hitColliders)
-                    {
-                        Debug.Log(col.gameObject.name);
-                    }
-             //   }
-                   // isRightLocation = true;
-            }
-*//*            do
+            } else if (obj.GetComponent<locationGeneratorMap1>() != null)
             {
-                counter++;
-                if (counter > 100)
-                    break;
-                Debug.Log(spawnPoint);
-            } while (!Physics.CheckSphere(spawnPoint, 0.1f));*/
-            spawnPoint = scr.generateLocation();
+                var sc = obj.GetComponent<locationGeneratorMap1>();
+                spawnPoint = sc.generateLocation();
+            }
         }
         else
         {
