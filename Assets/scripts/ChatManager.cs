@@ -106,8 +106,8 @@ public class ChatManager : MonoBehaviour
 
     public void AddMessage(string message)
     {
-        if (!SceneManager.GetActiveScene().name.Equals("Game"))
-            return;
+   //     if (!SceneManager.GetActiveScene().name.Equals("Game"))
+     //       return;
         messagesLog = GameObject.Find("Canvas").transform.Find("MessagePanel")
               .Find("MessagesInputField").gameObject.GetComponent(typeof(InputField)) as InputField;
         if (messagesLog == null)

@@ -208,7 +208,9 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         // here i can insert 5 instead of 1 to build the multiplayer without enemies mode.
         //6 is map 1
         //7 is map 2
-        PhotonNetwork.LoadLevel(1);
+        //8 is multiplayer survival ma  p 1
+        //9 is multiplayer survival map 2
+        PhotonNetwork.LoadLevel(9);
     }
 
 

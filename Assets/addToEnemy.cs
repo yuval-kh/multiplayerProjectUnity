@@ -9,8 +9,9 @@ public class addToEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-            return;
+        //     if (SceneManager.GetActiveScene().buildIndex != 1)
+        //       return;
+        if (!isRightLevel()) return;
         var pv = gameObject.GetComponent<PhotonView>();
         
 
@@ -18,6 +19,14 @@ public class addToEnemy : MonoBehaviour
         {
             EnemyManagerSurvivalOnline.Instance.addPlayer(this.transform);
         }
+    }
+
+    private bool isRightLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 8
+            || SceneManager.GetActiveScene().buildIndex == 9)
+            return true;
+        else return false;
     }
 
     // Update is called once per frame

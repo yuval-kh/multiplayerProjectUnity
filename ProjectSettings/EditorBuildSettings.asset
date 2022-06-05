@@ -15,18 +15,24 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOver.unity
     guid: 9f803a69e11e564469f745a422c4e894
   - enabled: 1
-    path: Assets/Scenes/FreeRoam.unity
+    path: Assets/Scenes/FreeRoamScenes/FreeRoam.unity
     guid: dd79746c8912f4a43862b130b438903c
   - enabled: 1
-    path: Assets/Scenes/Survival.unity
+    path: Assets/Scenes/SurvivalOffline/Survival.unity
     guid: 2ac5a1b9b4602bc41a09f694a2179167
   - enabled: 1
-    path: Assets/Scenes/multiplayerNoEnemiesMaze.unity
+    path: Assets/Scenes/multiplayerNoEnemies/multiplayerNoEnemiesMaze.unity
     guid: c822a94870c40cc43af158c99948b28d
   - enabled: 1
-    path: Assets/Scenes/multiplayerNoEnemiesMap1.unity
+    path: Assets/Scenes/multiplayerNoEnemies/multiplayerNoEnemiesMap1.unity
     guid: f446e53be173972468ea42315bb4fb65
   - enabled: 1
-    path: Assets/Scenes/multiplayerNoEnemiesMap2.unity
+    path: Assets/Scenes/multiplayerNoEnemies/multiplayerNoEnemiesMap2.unity
     guid: c57c93457cd20cb47a1f0d26493f2160
+  - enabled: 1
+    path: Assets/Scenes/multiplayerMap1.unity
+    guid: e9e22a2fc77be474cad97addb13ba8dd
+  - enabled: 1
+    path: Assets/Scenes/multiplayerMap2.unity
+    guid: e071d69e96bd0cb47bac016c07d3ee91
   m_configObjects: {}

@@ -202,12 +202,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2321435428199807292}
   - component: {fileID: 2909493400169758485}
-  - component: {fileID: 7490193116919146728}
+  - component: {fileID: -4242857459045813044}
   - component: {fileID: 905250448047583096}
   - component: {fileID: 596113431529892693}
-  - component: {fileID: -6079871567788717497}
   m_Layer: 0
-  m_Name: EnemySurvivalOfflineMap2
+  m_Name: EnemySurvivalOnline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3803431396737150512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.041, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 3494249759497272945}
@@ -249,10 +248,10 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.4
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7490193116919146728
+--- !u!114 &-4242857459045813044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,7 +260,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3803431396737150512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2bd5d4c963f12f42a5ce982d8b21bda, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b30f981e4a36474e977c48d48069e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackDistance: 3
@@ -302,18 +301,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6079871567788717497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3803431396737150512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f2599543c4255c40ad9ff23d5a903a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6119073495747824648
 GameObject:
   m_ObjectHideFlags: 0

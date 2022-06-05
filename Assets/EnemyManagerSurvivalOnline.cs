@@ -76,6 +76,8 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
 
 
         var maze = GameObject.Find("MazeRenderer");
+        if (maze == null)
+            return;
         minX = minY = minZ = 9999;
         maxX = maxY = maxZ = -9999;
         foreach (Transform child in maze.transform)

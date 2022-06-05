@@ -16,6 +16,10 @@ public class TakeDamageBody : MonoBehaviour,IDamageable
         {
             transform.parent.gameObject.GetComponent<NPCEnemyOffline>().TakeDamage(damage);
         }
+       if (transform.parent.gameObject.GetComponent<NPCEnemySurvival>() != null)
+        {
+            transform.parent.gameObject.GetComponent<NPCEnemySurvival>().TakeDamage(damage);
+        }
     }
 
 
