@@ -35,4 +35,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/multiplayerMap2.unity
     guid: e071d69e96bd0cb47bac016c07d3ee91
+  - enabled: 1
+    path: Assets/Scenes/SurvivalOffline/SurvivalMap1.unity
+    guid: 011a4d6e002452c4b896e0eb57d0e815
+  - enabled: 1
+    path: Assets/Scenes/SurvivalOffline/SurvivalMap2.unity
+    guid: 38aacee4a8b25234eae173dcf473404b
+  - enabled: 1
+    path: Assets/Scenes/FreeRoamScenes/FreeRoam 1.unity
+    guid: 342e494467b0d7f49809826cc27ab752
+  - enabled: 1
+    path: Assets/Scenes/FreeRoamScenes/FreeRoam 2.unity
+    guid: f8f807d0f4a830744b81806cc8d21f73
   m_configObjects: {}

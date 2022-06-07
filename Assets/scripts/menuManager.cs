@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class menuManager : MonoBehaviour
 {
     public static menuManager Instance;
     [SerializeField] Menu[] menus;
+
+
+
 
     private void Awake()
     {
@@ -29,6 +34,9 @@ public class menuManager : MonoBehaviour
 
     public void OpenMenu(Menu menu)
     {
+
+
+
         // First, close the currently open menu
         for (int i = 0; i < menus.Length; i++)
         {

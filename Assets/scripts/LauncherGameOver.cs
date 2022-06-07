@@ -7,6 +7,7 @@ using Photon.Realtime;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class LauncherGameOver : MonoBehaviourPunCallbacks
 {
@@ -37,6 +38,11 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     private const int messageCount = 10;
 
 
+    bool isMultiplayer; // false - singleplayer true multiplayer
+    int mapIndex; // 0 - maze 1 - map1 2 - map2
+    bool isSurvival; //true - survival false - free roam
+    int buildMapIndexMp;
+
     private void Awake()
     {
         Instance = this;
@@ -57,14 +63,15 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-    //    messages = new Queue<string>(messageCount);
+        //    messages = new Queue<string>(messageCount);
 
 
-
+        buildMapIndexMp = -1;
         if (reloadedNum == 0)
         {
-            menuManager.Instance.OpenMenu("title");
+            menuManager.Instance.OpenMenu("NEWtitle");
         }
+    //    else menuManager.Instance.OpenMenu("gameover");
         reloadedNum++;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -96,7 +103,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         // 1 is used as the build index of the game scene, defined in the build settings
         // Use this instead of scene management so that *everyone* in the lobby goes into this scene
         Debug.Log("my name is " + PhotonNetwork.LocalPlayer.NickName);
-        menuManager.Instance.OpenMenu("title");
+        menuManager.Instance.OpenMenu("NEWtitle");
     }
 
 
@@ -168,7 +175,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        menuManager.Instance.OpenMenu("title");
+        menuManager.Instance.OpenMenu("NEWtitle");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -208,9 +215,13 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         // here i can insert 5 instead of 1 to build the multiplayer without enemies mode.
         //6 is map 1
         //7 is map 2
-        //8 is multiplayer survival ma  p 1
+        //8 is multiplayer survival map 1
         //9 is multiplayer survival map 2
-        PhotonNetwork.LoadLevel(9);
+        if(buildMapIndexMp == -1)
+        {
+            Debug.LogError("ERROR WITH THE BUILD INDEX NUMBER:buildMapIndexMp");
+        }
+        PhotonNetwork.LoadLevel(buildMapIndexMp);
     }
 
 
@@ -230,10 +241,148 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
 
 
-
-
     public void QuitGame()
     {
         Application.Quit();
     }
+
+
+
+
+
+    public void setLevelOptions()
+    {
+
+        GameObject buttom = EventSystem.current.currentSelectedGameObject;
+        var buttomText = buttom.GetComponentInChildren<TextMeshProUGUI>().text;
+        if (buttomText.Equals("Multiplayer")) isMultiplayer = true;
+        if (buttomText.Equals("SinglePlayer")) isMultiplayer = false;
+        if (buttomText.Equals("Survival")) isSurvival = true;
+        if (buttomText.Equals("Multiplayer Without Enemies")
+            || buttomText.Equals("Free Roam"))
+        {
+            isSurvival = false;
+        }
+        if (buttomText.Equals("Random Maze"))
+        {
+            mapIndex = 0;
+            generateLevel();
+        }
+        if (buttomText.Equals("Map 1"))
+        {
+            mapIndex = 1;
+            generateLevel();
+        }
+
+        if (buttomText.Equals("Map 2"))
+        {
+            mapIndex = 2;
+            generateLevel();
+        }
+    }
+
+    private void generateLevel()
+    {
+      //  if (isMultiplayer)
+      //  {
+      //      return;
+     //   }
+     //   else
+      //  {
+            if (isSurvival)
+            {
+                switch (mapIndex)
+                {
+                    case 0:
+                        if(!isMultiplayer) goToSurvival();
+                        else
+                            {
+                        buildMapIndexMp = 1;
+                        menuManager.Instance.OpenMenu("create_room");
+                    
+                            }
+                        break;
+                    case 1:
+                    if (!isMultiplayer) goToSurvivalMap1();
+                    else
+                    {
+                        buildMapIndexMp = 8;
+                        menuManager.Instance.OpenMenu("create_room");
+
+                    }
+                    break;
+                    case 2:
+                    if (!isMultiplayer) goToSurvivalMap2();
+                    else
+                    {
+                        buildMapIndexMp = 9;
+                        menuManager.Instance.OpenMenu("create_room");
+
+                    }
+                    break;
+
+                }
+            }
+            else
+            {
+                switch (mapIndex)
+                {
+                    case 0:
+                    if (!isMultiplayer) goToFreeRoam();
+                    else
+                    {
+                        buildMapIndexMp = 5;
+                        menuManager.Instance.OpenMenu("create_room");
+
+                    }
+                    break;
+                    case 1:
+                    if (!isMultiplayer) goToFreeRoamMap1();
+                    else
+                    {
+                        buildMapIndexMp = 6;
+                        menuManager.Instance.OpenMenu("create_room");
+
+                    }
+                    break;
+                    case 2:
+                    if (!isMultiplayer) goToFreeRoamMap2();
+                    else
+                    {
+                        buildMapIndexMp = 7;
+                        menuManager.Instance.OpenMenu("create_room");
+
+                    }
+                    break;
+
+                }
+            }
+      //  }
+    }
+    public void BackButtomAtMaps()
+    {
+        if (isMultiplayer) menuManager.Instance.OpenMenu("ChooseModeMp");
+        else menuManager.Instance.OpenMenu("ChooseModeSp");
+    }
+    public void goToSurvivalMap1()
+    {
+        //  PhotonNetwork.OfflineMode = true;
+        SceneManager.LoadScene("SurvivalMap1");
+    }
+    public void goToSurvivalMap2()
+    {
+        //  PhotonNetwork.OfflineMode = true;
+        SceneManager.LoadScene("SurvivalMap2");
+    }
+    public void goToFreeRoamMap1()
+    {
+        //  PhotonNetwork.OfflineMode = true;
+        SceneManager.LoadScene("FreeRoam 1");
+    }
+    public void goToFreeRoamMap2()
+    {
+        //  PhotonNetwork.OfflineMode = true;
+        SceneManager.LoadScene("FreeRoam 2");
+    }
+
 }
