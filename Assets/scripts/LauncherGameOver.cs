@@ -266,23 +266,34 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         if (buttomText.Equals("Random Maze"))
         {
             mapIndex = 0;
-            generateLevel();
+            menuManager.Instance.OpenMenu("room_settings");
+       //     generateLevel();
         }
         if (buttomText.Equals("Map 1"))
         {
             mapIndex = 1;
-            generateLevel();
+            menuManager.Instance.OpenMenu("room_settings");
+            //    generateLevel();
         }
 
         if (buttomText.Equals("Map 2"))
         {
             mapIndex = 2;
-            generateLevel();
+            menuManager.Instance.OpenMenu("room_settings");
+            //   generateLevel();
         }
     }
 
-    private void generateLevel()
+    public void generateLevel()
     {
+        bool setSettingResults = SetGameSettings.Instance.setSettings();
+        if (setSettingResults == false)
+        {
+            Debug.Log("!!!!");
+            return;
+        }
+
+
       //  if (isMultiplayer)
       //  {
       //      return;
