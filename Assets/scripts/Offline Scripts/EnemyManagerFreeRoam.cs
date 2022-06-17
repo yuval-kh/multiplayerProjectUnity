@@ -12,6 +12,10 @@ public class EnemyManagerFreeRoam : MonoBehaviour
     //public Vector3 spawnPoint ;
     GameObject Enemy;
 
+    int EnemyHP;
+    int EnemySpeed;
+    public GameObject npcDeadPrefab;
+
     private void Awake()
     {
         Instance = this;
@@ -19,6 +23,8 @@ public class EnemyManagerFreeRoam : MonoBehaviour
 
     private void Start()
     {
+        EnemyHP = SetGameSettings.Instance.getEnemyHealth();
+        EnemySpeed = SetGameSettings.Instance.getEnemySpeed();
    //     spawnPoint = new Vector3(35, 0, -40);
     //   Enemy = Instantiate (EnemyPrefab, spawnPoint, Quaternion.identity);
     }
@@ -33,8 +39,19 @@ public class EnemyManagerFreeRoam : MonoBehaviour
             Enemy = Instantiate(EnemyPrefab, PlayerTransform.position + bias, Quaternion.identity);
                // var en = Enemy.GetComponent<SC_NPCEnemy>();
              //   en.addPlayer(PlayerTransform);
+
             var en = Enemy.GetComponent<NPCEnemyOffline>();
-            en.isActivateAtDist = false;
+            if (en != null)
+            {
+                en.isActivateAtDist = false;
+            }
+            var enTurorial = Enemy.GetComponent<NPCEnemyOfflineTutorial>();
+            if (enTurorial != null)
+            {
+                enTurorial.setDeadPrefab(npcDeadPrefab);
+            }
+            ///////////////09.06
+            //           en.setMovementSpeed(EnemySpeed);
 
         }
     }

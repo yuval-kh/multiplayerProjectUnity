@@ -8,8 +8,8 @@ using UnityEngine.AI;
 public class NPCEnemyOfflineTutorial : MonoBehaviour, IDamageable
 {
     public float attackDistance = 3f;
-    public float movementSpeed = 4f;
-    public float npcHP = 100;
+    public float movementSpeed ;
+    public float npcHP ;
     //How much damage will npc deal to the player
     public float npcDamage = 5;
     public float attackRate = 0.5f;
@@ -29,6 +29,10 @@ public class NPCEnemyOfflineTutorial : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        movementSpeed = SetGameSettings.Instance.getEnemySpeed();
+        npcHP = SetGameSettings.Instance.getEnemyHealth();
+       // npcDeadPrefab = (GameObject)Resources.Load("prefabs/Enemy (Dead)", typeof(GameObject));
+
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackDistance;
@@ -89,6 +93,11 @@ public class NPCEnemyOfflineTutorial : MonoBehaviour, IDamageable
             Destroy(npcDead, 10);
             Destroy(gameObject);
         }
+    }
+
+    public void setDeadPrefab(GameObject dead)
+    {
+        this.npcDeadPrefab = dead;
     }
 
 }

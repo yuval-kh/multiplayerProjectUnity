@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class NPCEnemySurvival : MonoBehaviour, IDamageable
 {
     public float attackDistance = 3f;
-    public float movementSpeed = 4f;
+    public float movementSpeed ;
     public float npcHP = 100;
     //How much damage will npc deal to the player
     public float npcDamage = 5;
@@ -29,7 +29,13 @@ public class NPCEnemySurvival : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-     //   player = GameObject.Find("Player").transform;
+        movementSpeed = SetGameSettings.Instance.getEnemySpeed();
+        npcHP = SetGameSettings.Instance.getEnemyHealth();
+        npcDamage = SetGameSettings.Instance.getEnemyDamage();
+        activateDistance = SetGameSettings.Instance.getActivationDist();
+
+
+        //   player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackDistance;
         agent.speed = movementSpeed;
@@ -54,9 +60,13 @@ public class NPCEnemySurvival : MonoBehaviour, IDamageable
         agent.destination = player.position;
         var navMesh = this.GetComponent<NavMeshAgent>();
 
+
+
+        float remainingDist = this.GetRemainingDistance(navMesh);
+
         if (agent.remainingDistance == 0)
             return;
-        if (isActivateAtDist && agent.remainingDistance >= activateDistance )
+        if (isActivateAtDist && remainingDist >= activateDistance )
         {
 
             navMesh.isStopped = true;
@@ -88,7 +98,7 @@ public class NPCEnemySurvival : MonoBehaviour, IDamageable
 
                         IDamageable playerScript = hit.transform.GetComponent<IDamageable>();
                         Debug.Log("Damage to player");
-                        // playerScript.TakeDamage(npcDamage);
+                         playerScript.TakeDamage(npcDamage);
                     }
                 }
             }
@@ -130,4 +140,27 @@ public class NPCEnemySurvival : MonoBehaviour, IDamageable
         this.player = p;
     }
 
+
+    public float GetRemainingDistance(NavMeshAgent nm)
+    {
+        float distance = 0;
+        Vector3[] corners = nm.path.corners;
+
+        if (corners.Length > 2)
+        {
+            for (int i = 1; i < corners.Length; i++)
+            {
+                Vector2 previous = new Vector2(corners[i - 1].x, corners[i - 1].z);
+                Vector2 current = new Vector2(corners[i].x, corners[i].z);
+
+                distance += Vector2.Distance(previous, current);
+            }
+        }
+        else
+        {
+            distance = nm.remainingDistance;
+        }
+
+        return distance;
+    }
 }

@@ -10,15 +10,35 @@ public class TakeDamageBody : MonoBehaviour,IDamageable
         Debug.Log("body take damage");
         if (transform.parent.gameObject.GetComponent<SC_NPCEnemy>() != null)
         {
-            transform.parent.gameObject.GetComponent<SC_NPCEnemy>().TakeDamage(damage);
+            var sc = transform.parent.gameObject.GetComponent<SC_NPCEnemy>();
+            if (sc.isActiveAndEnabled)
+            {
+                transform.parent.gameObject.GetComponent<SC_NPCEnemy>().TakeDamage(damage);
+            }
         }
         if (transform.parent.gameObject.GetComponent<NPCEnemyOffline>() != null)
         {
-            transform.parent.gameObject.GetComponent<NPCEnemyOffline>().TakeDamage(damage);
+            var sc = transform.parent.gameObject.GetComponent<NPCEnemyOffline>();
+            if (sc.isActiveAndEnabled)
+            {
+                transform.parent.gameObject.GetComponent<NPCEnemyOffline>().TakeDamage(damage);
+            }
         }
        if (transform.parent.gameObject.GetComponent<NPCEnemySurvival>() != null)
         {
-            transform.parent.gameObject.GetComponent<NPCEnemySurvival>().TakeDamage(damage);
+            var sc = transform.parent.gameObject.GetComponent<NPCEnemySurvival>();
+            if (sc.isActiveAndEnabled)
+            {
+                transform.parent.gameObject.GetComponent<NPCEnemySurvival>().TakeDamage(damage);
+            }
+        }
+        if (transform.parent.gameObject.GetComponent<NPCEnemyOfflineTutorial>() != null)
+        {
+            var sc = transform.parent.gameObject.GetComponent<NPCEnemyOfflineTutorial>();
+            if (sc.isActiveAndEnabled)
+            {
+                transform.parent.gameObject.GetComponent<NPCEnemyOfflineTutorial>().TakeDamage(damage);
+            }
         }
     }
 

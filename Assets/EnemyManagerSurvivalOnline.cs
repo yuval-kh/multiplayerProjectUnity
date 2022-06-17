@@ -15,7 +15,7 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
 
     public float spawnInterval = 2; //Spawn new enemy each n seconds
     private int enemiesPerWave; //How many enemies per wave
-    int waveNumber = 1;
+    int waveNumber;
     int enemiesToEliminate;
     //How many enemies we already eliminated in the current wave
     int enemiesEliminated;
@@ -40,7 +40,7 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
         pv = gameObject.GetComponent<PhotonView>();
         totalEnemiesSpawned = 0;
         enemiesEliminated = 0;
-        waveNumber = 1;
+        waveNumber = SetGameSettings.Instance.getFirstRound(); ;
         enemiesPerWave = 2;
         enemiesToEliminate = waveNumber * enemiesPerWave;
 

@@ -347,6 +347,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 3803431396737150512, guid: de6e6988d2ca0d8459c223e98abd2fde, type: 3}
   PlayerTransform: {fileID: 1610870182}
   bias: {x: 0, y: 1, z: 1}
+  npcDeadPrefab: {fileID: 6374475599110489727, guid: a4105e00caccceb4a83f24c43e9708ae, type: 3}
 --- !u!4 &331053102
 Transform:
   m_ObjectHideFlags: 0

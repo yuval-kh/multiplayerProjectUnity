@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class NPCEnemyOffline : MonoBehaviour, IDamageable
 {
     public float attackDistance = 3f;
-    public float movementSpeed = 4f;
+    public float movementSpeed;
     public float npcHP = 100;
     //How much damage will npc deal to the player
     public float npcDamage = 5;
@@ -29,6 +29,11 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        movementSpeed = SetGameSettings.Instance.getEnemySpeed();
+        npcHP = SetGameSettings.Instance.getEnemyHealth();
+        npcDamage = SetGameSettings.Instance.getEnemyDamage();
+        activateDistance = SetGameSettings.Instance.getActivationDist();
+
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackDistance;
@@ -56,11 +61,15 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
         //Debug.Log("The activateDistance is: " + activateDistance);
         //Debug.Log("The remaining distance is: " + agent.remainingDistance);
         //Debug.Log("is activate at dist: " + isActivateAtDist);
+        float remainingDist = this.GetRemainingDistance(navMesh);
         if (agent.remainingDistance == 0)
             return;
-        if (isActivateAtDist && agent.remainingDistance >= activateDistance )
+        if (isActivateAtDist && remainingDist >= activateDistance )// edited 13.06
         {
-
+            if (Input.GetKeyDown("l"))
+            {
+                Debug.Log("remain: " + agent.remainingDistance);
+            }
             navMesh.isStopped = true;
      //       Debug.Log("dont move");
             return;
@@ -92,7 +101,7 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
 
                         IDamageable playerScript = hit.transform.GetComponent<IDamageable>();
                         Debug.Log("Damage to player");
-                        // playerScript.TakeDamage(npcDamage);
+                        playerScript.TakeDamage(npcDamage);
                     }
                 }
             }
@@ -130,5 +139,41 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
             Destroy(gameObject);
         }
     }
+    
 
+    public void setMovementSpeed(int speed)
+    {
+        movementSpeed = speed;
+        if (agent != null)
+        {
+            agent.speed = speed;
+        }
+    }
+
+
+
+
+//added at 13.06
+public float GetRemainingDistance( NavMeshAgent nm)
+    {
+        float distance = 0;
+        Vector3[] corners = nm.path.corners;
+
+        if (corners.Length > 2)
+        {
+            for (int i = 1; i < corners.Length; i++)
+            {
+                Vector2 previous = new Vector2(corners[i - 1].x, corners[i - 1].z);
+                Vector2 current = new Vector2(corners[i].x, corners[i].z);
+
+                distance += Vector2.Distance(previous, current);
+            }
+        }
+        else
+        {
+            distance = nm.remainingDistance;
+        }
+
+        return distance;
+    }
 }

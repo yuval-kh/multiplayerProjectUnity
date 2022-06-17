@@ -15,7 +15,7 @@ public class EnemyManagerSurvival : MonoBehaviour
     public float spawnInterval = 2; //Spawn new enemy each n seconds
     private int enemiesPerWave; //How many enemies per wave
     float nextSpawnTime = 0;
-    int waveNumber = 1;
+    int waveNumber;
     bool waitingForWave = true;
     float newWaveTimer = 0;
     int enemiesToEliminate;
@@ -57,6 +57,7 @@ public class EnemyManagerSurvival : MonoBehaviour
 
         waitingForWave = true;
         enemiesPerWave = 2;
+        waveNumber = SetGameSettings.Instance.getFirstRound();
     }
 
     private void Update()
@@ -108,13 +109,13 @@ public class EnemyManagerSurvival : MonoBehaviour
                 if (script != null)
                 {
                     script.isActivateAtDist = true;
-                    script.activateDistance = 2;
+                    script.activateDistance = SetGameSettings.Instance.getActivationDist();
                 }
                 else
                 {
                     var scriptOffline = enemy.GetComponent<NPCEnemyOffline>();
                     scriptOffline.isActivateAtDist = true;
-                    scriptOffline.activateDistance = 2;
+                    scriptOffline.activateDistance = SetGameSettings.Instance.getActivationDist();
 
                 }
                 //    var npc = enemy.GetComponent<UpdateEnemyManagerSurvival>();

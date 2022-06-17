@@ -136,8 +136,27 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
             int tempSeed = UnityEngine.Random.Range(0, 100000);
 
             hash["seed"] = tempSeed;
+            ///
+            //15.06~~FINDQUICK
+            hash["playerSpeed"] = SetGameSettings.Instance.getPlayerSpeed();
+            hash["EnemyHealth"] = SetGameSettings.Instance.getEnemyHealth();
+            hash["EnemySpeed"] = SetGameSettings.Instance.getEnemySpeed();
+            hash["EnemyDamage"] = SetGameSettings.Instance.getEnemyDamage();
+            hash["ActivationDist"] = SetGameSettings.Instance.getActivationDist();
+            hash["FirstRound"] = SetGameSettings.Instance.getFirstRound();
 
+            ///
             PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
+        }
+        else
+        {
+            var properties = PhotonNetwork.CurrentRoom.CustomProperties;
+            SetGameSettings.Instance.setPlayerSpeed((int)properties["playerSpeed"]);
+            SetGameSettings.Instance.setEnemyHealth((int)properties["EnemyHealth"]);
+            SetGameSettings.Instance.setEnemySpeed((int)properties["EnemySpeed"]);
+            SetGameSettings.Instance.setEnemyDamage((int)properties["EnemyDamage"]);
+            SetGameSettings.Instance.setActivationDist((int)properties["ActivationDist"]);
+            SetGameSettings.Instance.setFirstRound((int)properties["FirstRound"]);
         }
 
         menuManager.Instance.OpenMenu("room");
@@ -286,7 +305,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
     public void generateLevel()
     {
-        bool setSettingResults = SetGameSettings.Instance.setSettings();
+        bool setSettingResults = SetGameSettings.Instance.setSettingsFromTextBox();
         if (setSettingResults == false)
         {
             Debug.Log("!!!!");

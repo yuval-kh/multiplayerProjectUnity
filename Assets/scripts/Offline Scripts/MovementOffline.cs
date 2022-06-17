@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementOffline : MonoBehaviour
 {
     public CharacterController controller;
-    public float speed = 12f;
+    public float speed ;
     public GameObject _camera;
 
 
@@ -21,6 +21,7 @@ public class MovementOffline : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.speed = SetGameSettings.Instance.getPlayerSpeed();
         _camera.SetActive(true);
 
         float x = Input.GetAxis("Horizontal");

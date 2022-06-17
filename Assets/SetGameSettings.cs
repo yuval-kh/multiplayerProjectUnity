@@ -11,13 +11,18 @@ public class SetGameSettings : MonoBehaviour
 {
     public static SetGameSettings Instance;
 
-
-    public TMP_InputField playerSpeedTextBox;
-    public TMP_InputField EnemyHealthTextBox;
-    public TMP_InputField EnemySpeedTextBox;
-    public TMP_InputField EnemyDamageTextBox;
-    public TMP_InputField ActivationDistTextBox;
-    public TMP_InputField FirstRoundTextBox;
+    [SerializeField]
+    private TMP_InputField playerSpeedTextBox;
+    [SerializeField]
+    private TMP_InputField EnemyHealthTextBox;
+    [SerializeField]
+    private TMP_InputField EnemySpeedTextBox;
+    [SerializeField]
+    private TMP_InputField EnemyDamageTextBox;
+    [SerializeField]
+    private TMP_InputField ActivationDistTextBox;
+    [SerializeField]
+    private TMP_InputField FirstRoundTextBox;
 
 
     int playerSpeed;
@@ -30,18 +35,30 @@ public class SetGameSettings : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        DontDestroyOnLoad(this);
+      
+        if(playerSpeedTextBox == null) Destroy(this);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        if(Instance.playerSpeedTextBox == null)
+        {
+            Destroy(Instance.gameObject);
+            Instance = this;
+        }
+        DontDestroyOnLoad(Instance);
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        if (playerSpeedTextBox == null) Destroy(this);
         playerSpeed = EnemyHealth = EnemySpeed = EnemyDamage = ActivationDist = FirstRound = -1;
     }
-    public bool setSettings()
+    public bool setSettingsFromTextBox()
     {
+        if (Instance != this) return false ;
         string str = playerSpeedTextBox.text;
         Debug.Log("Textbox: ||" + str+ "||");
         int playerSpeed = getNumber(str);
@@ -81,6 +98,7 @@ public class SetGameSettings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Instance != this) return;
         if (Input.GetKeyDown("space"))
         {
             Debug.Log("playerSpeed: " + playerSpeed);
@@ -91,4 +109,18 @@ public class SetGameSettings : MonoBehaviour
             Debug.Log("FirstRound: " + FirstRound);
         }
     }
+
+    public int getPlayerSpeed() { return this.playerSpeed; }
+    public int getEnemyHealth() { return this.EnemyHealth; }
+    public int getEnemySpeed() { return this.EnemySpeed; }
+    public int getEnemyDamage() { return this.EnemyDamage; }
+    public int getActivationDist() { return this.ActivationDist; }
+    public int getFirstRound() { return this.FirstRound; }
+
+    public void setPlayerSpeed(int playerSpeed) { this.playerSpeed = playerSpeed; }
+    public void setEnemyHealth(int EnemyHealth) { this.EnemyHealth = EnemyHealth; }
+    public void setEnemySpeed(int EnemySpeed) { this.EnemySpeed = EnemySpeed; }
+    public void setEnemyDamage(int EnemyDamage) { this.EnemyDamage = EnemyDamage; }
+    public void setActivationDist(int ActivationDist) { this.ActivationDist = ActivationDist; }
+    public void setFirstRound(int FirstRound) { this.FirstRound = FirstRound; }
 }
