@@ -26,6 +26,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     private void Start()
     {
+
+
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     //    Instantiate(roomManager, new Vector3(0,0,0), Quaternion.identity);
@@ -57,7 +60,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (PhotonNetwork.NickName == "")
         {
             PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString(); // Set a default nickname, just as a backup
-            menuManager.Instance.OpenMenu("name");
+            menuManager.Instance.OpenMenu("login");/////17.06
         }
         else
         {
@@ -76,7 +79,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (!string.IsNullOrEmpty(name))
         {
             PhotonNetwork.NickName = name;
-      //      titleWelcomeText.text = $"Welcome, {name}!";
+           // DefaultSettingsGame.initiateValues();
+            //      titleWelcomeText.text = $"Welcome, {name}!";
             PhotonNetwork.LoadLevel(2);
             Destroy(this);
             return;

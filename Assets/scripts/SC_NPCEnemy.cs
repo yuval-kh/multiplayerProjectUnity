@@ -132,6 +132,14 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
         npcHP -= damage;
         if(npcHP <= 0)
         {
+            //18.06
+            StatisticsHolder.EnemiesKilled++;
+
+            //
+
+
+
+
             willDie = true;
             ///////////////
             if(EnemyManager.Instance != null && !isCalled)

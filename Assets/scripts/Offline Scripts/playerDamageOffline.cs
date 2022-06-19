@@ -39,12 +39,14 @@ public class playerDamageOffline : MonoBehaviour, IDamageable
         Debug.Log("The health is: " + health);
         if (health <= 0f)
         {
+            
             Die();
         }
     }
 
     private void Die()
     {
+        StatisticsHolder.totalDeaths++;
         /*      //  Debug.Log("DIE");
                 Movement movement = gameObject.GetComponent<Movement>();
                 if (movement != null)

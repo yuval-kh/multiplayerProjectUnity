@@ -43,16 +43,24 @@ public class playerDamage : MonoBehaviourPun, IDamageable
         Debug.Log("The health is: " + health);
         if (health <= 0f)
         {
+
             Die();
         }
     }
 
     private void Die()
     {
-      //  Debug.Log("DIE");
+
+
+        //  Debug.Log("DIE");
         Movement movement = gameObject.GetComponent<Movement>();
         PhotonView pv = gameObject.GetComponent<PhotonView>();
-        ////////////////////////
+
+        ////////////////////////18.06
+        ///
+        pv.RPC("updateStats", RpcTarget.All);
+
+        ////
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
             var list = GameObject.FindGameObjectsWithTag("Enemy");
@@ -72,5 +80,14 @@ public class playerDamage : MonoBehaviourPun, IDamageable
             return;
         }
          Destroy(gameObject);
+    }
+
+    [PunRPC]
+    void updateStats()
+    {
+        PhotonView pv = gameObject.GetComponent<PhotonView>();
+        if (pv == null) return;
+        if (pv.IsMine) StatisticsHolder.totalDeaths++;
+        else StatisticsHolder.EnemiesKilled++;
     }
 }

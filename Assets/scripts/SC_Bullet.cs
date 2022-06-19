@@ -18,6 +18,10 @@ public class SC_Bullet : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        //19.06
+        StatisticsHolder.bulletsShot++;
+
+        /////
    //     Debug.Log("bullet time");
         newPos = transform.position;
         oldPos = newPos;

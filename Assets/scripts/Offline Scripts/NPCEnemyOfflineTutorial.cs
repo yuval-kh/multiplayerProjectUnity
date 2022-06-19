@@ -81,6 +81,14 @@ public class NPCEnemyOfflineTutorial : MonoBehaviour, IDamageable
         npcHP -= damage;
         if(npcHP <= 0)
         {
+            //18.06
+            StatisticsHolder.EnemiesKilled++;
+
+            //
+
+
+
+
             Debug.Log("NPC dead");
             
                 

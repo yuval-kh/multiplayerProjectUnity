@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FreeRoamScenes/FreeRoam 2.unity
     guid: f8f807d0f4a830744b81806cc8d21f73
+  - enabled: 1
+    path: Assets/Scenes/Registermenu.unity
+    guid: 6fc8741ebddf5cb4d84307ee4334c02b
+  - enabled: 1
+    path: Assets/FROMLOGINPROJECT/loginmenu.unity
+    guid: 58185a1bfcea49f45beccc45646c243e
   m_configObjects: {}

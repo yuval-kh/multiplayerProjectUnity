@@ -37,12 +37,21 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
 
     private void Start()
     {
+
+
+
         pv = gameObject.GetComponent<PhotonView>();
         totalEnemiesSpawned = 0;
         enemiesEliminated = 0;
-        waveNumber = SetGameSettings.Instance.getFirstRound(); ;
+        waveNumber = SetGameSettings.Instance.getFirstRound();
         enemiesPerWave = 2;
         enemiesToEliminate = waveNumber * enemiesPerWave;
+
+        ///18.06
+        ///
+        StatisticsHolder.gamesPlayed++;
+        StatisticsHolder.maxWaveReached = waveNumber;
+        //
 
 
         initializeLimitCoordinates();
@@ -127,5 +136,11 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
     {
         waveNumber++;
         enemiesToEliminate +=  waveNumber * enemiesPerWave;
+
+
+        ///18.06
+        ///
+        StatisticsHolder.maxWaveReached = waveNumber;
+        //
     }
 }

@@ -58,6 +58,13 @@ public class EnemyManagerSurvival : MonoBehaviour
         waitingForWave = true;
         enemiesPerWave = 2;
         waveNumber = SetGameSettings.Instance.getFirstRound();
+
+
+        ///18.06
+        ///
+        StatisticsHolder.gamesPlayed++;
+        StatisticsHolder.maxWaveReached = waveNumber;
+        //
     }
 
     private void Update()
@@ -186,6 +193,12 @@ public class EnemyManagerSurvival : MonoBehaviour
             newWaveTimer = 10;
             waitingForWave = true;
             waveNumber++;
+
+
+            ///18.06
+            ///
+            StatisticsHolder.maxWaveReached = waveNumber;
+            //
         }
     }
 }
