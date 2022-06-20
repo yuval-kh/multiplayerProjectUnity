@@ -9,6 +9,9 @@ public class Login : MonoBehaviour
 
     public TMP_InputField nameField;
     public TMP_InputField passwordField;
+    public TextMeshProUGUI SuccessText;
+    public TextMeshProUGUI ErrorText;
+
 
     public Button submitButtom;
 
@@ -33,11 +36,15 @@ public class Login : MonoBehaviour
 
 
             menuManager.Instance.OpenMenu("login");
+            SuccessText.gameObject.SetActive(true);
+            ErrorText.gameObject.SetActive(false);
 
         }
         else
         {
             Debug.Log("User login failed. Error #" + www.text);
+            ErrorText.gameObject.SetActive(true);
+            SuccessText.gameObject.SetActive(false);
         }
     }
 

@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
 {
     public Button registerButton; 
     public Button loginButton;
+    public Button deleteButton;
     public Button playButton;
     public TextMeshProUGUI playerDisplay;
 
@@ -24,19 +25,36 @@ public class MainMenu : MonoBehaviour
             playerDisplay.text = "Player: " + DBManager.username;
         }
 
-        registerButton.interactable = !DBManager.LoggedIn;
-        loginButton.interactable = !DBManager.LoggedIn;
-        playButton.interactable = DBManager.LoggedIn;
+        UpdateButtoms();
 
     }
 
     void OnEnable()
     {
-        registerButton.interactable = !DBManager.LoggedIn;
-        loginButton.interactable = !DBManager.LoggedIn;
-        playButton.interactable = DBManager.LoggedIn;
+        UpdateButtoms();
     }
 
+    public void UpdateButtoms()
+    {
+        registerButton.interactable = !DBManager.LoggedIn;
+        loginButton.interactable = !DBManager.LoggedIn;
+        deleteButton.interactable = !DBManager.LoggedIn;
+        playButton.interactable = DBManager.LoggedIn;
+        if (!DBManager.LoggedIn)
+        {
+            playerDisplay.text = "NOT LOGGED IN";
+            playerDisplay.color = new Color(255, 0, 0, 255);
+        }
+        else
+        {
+            playerDisplay.text = DBManager.username;
+            playerDisplay.color = new Color(0, 255, 0, 255);
+        }
+    }
+    public void Update()
+    {
+        UpdateButtoms();
+    }
 
     public void GoToRegister()
     {

@@ -14,8 +14,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     //[SerializeField] TMP_Text titleWelcomeText;
 
 
-
-
+    ////#### ====> means i changed it or needed to change because of the menu change.
+    public GameObject mainLoginMenu; ////######
+    public GameObject LoadingMenu; ////######
  //  public GameObject roomManager;
 
 
@@ -41,7 +42,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("already connected");
-            menuManager.Instance.OpenMenu("gameover");
+            menuManager.Instance.OpenMenu("gameover");////######
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             PhotonNetwork.JoinLobby();
@@ -60,14 +61,17 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (PhotonNetwork.NickName == "")
         {
             PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString(); // Set a default nickname, just as a backup
-            menuManager.Instance.OpenMenu("login");/////17.06
+             // menuManager.Instance.OpenMenu("login");/////17.06////######
+            mainLoginMenu.SetActive(true);
+            LoadingMenu.SetActive(false);
+
         }
         else
         {
-            if (!menuManager.Instance.MenuIsActive("gameover"))
+            if (!menuManager.Instance.MenuIsActive("gameover"))/////######
             {
 
-                menuManager.Instance.OpenMenu("title");
+                menuManager.Instance.OpenMenu("title");////######
             }
         }
         Debug.Log("Joined lobby regular");
