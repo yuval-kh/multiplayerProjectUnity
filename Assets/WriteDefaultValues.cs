@@ -11,7 +11,7 @@ public class WriteDefaultValues : MonoBehaviour
     public TMP_InputField enemyDamageField;
     public TMP_InputField ActivationDistanceField;
     public TMP_InputField FirstRoundField;
-  //  public TMP_InputField MazeSizeField;
+    public TMP_InputField MazeSizeField;
     // Start is called before the first frame update
 
     void Start()
@@ -31,7 +31,7 @@ public class WriteDefaultValues : MonoBehaviour
         enemyDamageField.text = DefaultSettingsGame.enemyDamage.ToString();
         ActivationDistanceField.text = DefaultSettingsGame.ActivationDistance.ToString();
         FirstRoundField.text = DefaultSettingsGame.FirstRound.ToString();
-        //MazeSizeField.text = DefaultSettingsGame.MazeSize.ToString();
+        MazeSizeField.text = DefaultSettingsGame.MazeSize.ToString();
     }
 
     public void changeDefaultValues()
@@ -42,6 +42,7 @@ public class WriteDefaultValues : MonoBehaviour
         DefaultSettingsGame.enemyDamage = int.Parse(enemyDamageField.text);
         DefaultSettingsGame.ActivationDistance = int.Parse(ActivationDistanceField.text);
         DefaultSettingsGame.FirstRound = int.Parse(FirstRoundField.text);
+        DefaultSettingsGame.MazeSize = int.Parse(MazeSizeField.text);
         if (DBManager.LoggedIn)
         {
             GetDBStats.Instance.CallSetStats();

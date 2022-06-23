@@ -67,15 +67,27 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
 
         buildMapIndexMp = -1;
-        if (reloadedNum == 0)
+        if (reloadedNum == 0)// NEW REMOVED IF 22.06
         {
-            menuManager.Instance.OpenMenu("NEWtitle");
+            Debug.Log("MAIN");
+            //  menuManager.Instance.OpenMenu("NEWtitle");@@@21.06
+            UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+            scriptUi.openmainMenu();
+
         }
     //    else menuManager.Instance.OpenMenu("gameover");
         reloadedNum++;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        PhotonNetwork.ConnectUsingSettings();
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
+        else
+        {
+            UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+            scriptUi.openmainMenu();
+        }
 
     //    PhotonNetwork.JoinLobby();////////////////////!!!!!!!!!!!!!!1
     }
@@ -86,6 +98,9 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         // Automatically load scene for all clients when the host loads a scene
         PhotonNetwork.AutomaticallySyncScene = true;
+        //22.06
+        UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+        scriptUi.openmainMenu();
     }
     public override void OnJoinedLobby()
     {
@@ -103,7 +118,9 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         // 1 is used as the build index of the game scene, defined in the build settings
         // Use this instead of scene management so that *everyone* in the lobby goes into this scene
         Debug.Log("my name is " + PhotonNetwork.LocalPlayer.NickName);
-        menuManager.Instance.OpenMenu("NEWtitle");
+        //    menuManager.Instance.OpenMenu("NEWtitle");@@@21.06
+        UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+        scriptUi.openmainMenu();
     }
 
 
@@ -115,7 +132,9 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         if (!string.IsNullOrEmpty(roomNameInputField.text))
         {
             PhotonNetwork.CreateRoom(roomNameInputField.text);
-            menuManager.Instance.OpenMenu("loading");
+          //  menuManager.Instance.OpenMenu("loading");@@@@21.06
+            UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+            scriptUi.openLoadingScreen();
             roomNameInputField.text = "";
         }
         else
@@ -160,6 +179,10 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         }
 
         menuManager.Instance.OpenMenu("room");
+        UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+        scriptUi.openroomsMenu();//22.06
+
+
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
         Player[] players = PhotonNetwork.PlayerList;
         foreach (Transform trans in playerListContent)
@@ -183,18 +206,24 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-        menuManager.Instance.OpenMenu("loading");
+       // menuManager.Instance.OpenMenu("loading");//@@@@21.06
+        UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+        scriptUi.openLoadingScreen();
     }
 
     public void JoinRoom(RoomInfo info)
     {
         PhotonNetwork.JoinRoom(info.Name);
-        menuManager.Instance.OpenMenu("loading");
+       // menuManager.Instance.OpenMenu("loading");///@@@21.06
+        UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+        scriptUi.openLoadingScreen();
     }
 
     public override void OnLeftRoom()
     {
         menuManager.Instance.OpenMenu("NEWtitle");
+        UIFunctions scriptUi = this.GetComponent<UIFunctions>();
+        scriptUi.openmainMenu();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -267,9 +296,13 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
 
 
-
-
-    public void setLevelOptions()
+    public void setLevelOptions(bool isMp, bool Survival, int map)
+    {
+        isMultiplayer = isMp;
+        isSurvival = Survival;
+        mapIndex = map;
+    }
+        public void setLevelOptions()
     {
 
         GameObject buttom = EventSystem.current.currentSelectedGameObject;
