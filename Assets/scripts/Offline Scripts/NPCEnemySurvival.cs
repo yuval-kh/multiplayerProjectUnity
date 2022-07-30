@@ -33,9 +33,6 @@ public class NPCEnemySurvival : MonoBehaviour, IDamageable
         npcHP = SetGameSettings.Instance.getEnemyHealth();
         npcDamage = SetGameSettings.Instance.getEnemyDamage();
         activateDistance = SetGameSettings.Instance.getActivationDist();
-
-
-        //   player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackDistance;
         agent.speed = movementSpeed;
@@ -108,16 +105,15 @@ public class NPCEnemySurvival : MonoBehaviour, IDamageable
     }
 
 
-        public void TakeDamage(float damage)//HERE!!!!
+        public void TakeDamage(float damage)
     {
         Debug.Log("NPC Took Damage " + npcHP);
         npcHP -= damage;
         if(npcHP <= 0)
         {
-            //18.06
+
             StatisticsHolder.EnemiesKilled++;
 
-            //
             Debug.Log("NPC dead");
 
             if (EnemyManagerSurvivalOnline.Instance != null)
@@ -125,11 +121,6 @@ public class NPCEnemySurvival : MonoBehaviour, IDamageable
                 EnemyManagerSurvivalOnline.Instance.EnemyEliminated();
 
             }
-
-
-
-
-
 
             //Destroy the NPC
             GameObject npcDead = Instantiate(npcDeadPrefab, transform.position, transform.rotation);

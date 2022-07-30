@@ -47,19 +47,6 @@ public class playerDamageOffline : MonoBehaviour, IDamageable
     private void Die()
     {
         StatisticsHolder.totalDeaths++;
-        /*      //  Debug.Log("DIE");
-                Movement movement = gameObject.GetComponent<Movement>();
-                if (movement != null)
-                {
-                 //   Debug.Log("it's a player");
-                //    PhotonNetwork.OfflineMode = false;
-                    Destroy(gameObject);
-                    SceneManager.LoadScene(2);
-                    //PhotonNetwork.LoadLevel(1);
-                    //TODO: add here go to the main menu scene or dying in any way
-                    return;
-                }
-                 Destroy(gameObject);*/
         SceneManager.LoadScene(2);
     }
 }

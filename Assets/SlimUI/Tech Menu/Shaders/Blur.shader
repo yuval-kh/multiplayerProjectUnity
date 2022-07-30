@@ -2,6 +2,9 @@
     Properties {
         _Color ("Main Color", Color) = (1,1,1,1)
         _Size ("Size", Range(0, 20)) = 1
+
+       _MainTex("Font Atlas", 2D) = "white" {}
+
     }
  
     Category {
@@ -172,6 +175,7 @@
                 sampler2D _GrabTexture;
                 float4 _GrabTexture_TexelSize;
                 sampler2D _MainTex;
+
              
                 half4 frag( v2f i ) : COLOR {
              

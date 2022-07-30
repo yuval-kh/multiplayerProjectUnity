@@ -14,8 +14,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     public static LauncherGameOver Instance;
 
 
-   // [SerializeField] TMP_InputField playerNameInputField;
-  //  [SerializeField] TMP_Text titleWelcomeText;
     [SerializeField] TMP_InputField roomNameInputField;
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomListItemPrefab;
@@ -63,19 +61,16 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        //    messages = new Queue<string>(messageCount);
 
 
         buildMapIndexMp = -1;
         if (reloadedNum == 0)// NEW REMOVED IF 22.06
         {
             Debug.Log("MAIN");
-            //  menuManager.Instance.OpenMenu("NEWtitle");@@@21.06
             UIFunctions scriptUi = this.GetComponent<UIFunctions>();
             scriptUi.openmainMenu();
 
         }
-    //    else menuManager.Instance.OpenMenu("gameover");
         reloadedNum++;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -89,7 +84,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
             scriptUi.openmainMenu();
         }
 
-    //    PhotonNetwork.JoinLobby();////////////////////!!!!!!!!!!!!!!1
     }
 
     public override void OnConnectedToMaster()
@@ -98,7 +92,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         // Automatically load scene for all clients when the host loads a scene
         PhotonNetwork.AutomaticallySyncScene = true;
-        //22.06
         UIFunctions scriptUi = this.GetComponent<UIFunctions>();
         scriptUi.openmainMenu();
     }
@@ -107,18 +100,12 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         Debug.Log("Joined lobby gameover");
     }
 
-    // Update is called once per frame
- //   void Update()
- //   {
-        
-   // }
     public void GoToMainMenu()
     {
         Debug.Log("Start game method in the script LauncherGameOver :-)");
         // 1 is used as the build index of the game scene, defined in the build settings
         // Use this instead of scene management so that *everyone* in the lobby goes into this scene
         Debug.Log("my name is " + PhotonNetwork.LocalPlayer.NickName);
-        //    menuManager.Instance.OpenMenu("NEWtitle");@@@21.06
         UIFunctions scriptUi = this.GetComponent<UIFunctions>();
         scriptUi.openmainMenu();
     }
@@ -132,7 +119,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         if (!string.IsNullOrEmpty(roomNameInputField.text))
         {
             PhotonNetwork.CreateRoom(roomNameInputField.text);
-          //  menuManager.Instance.OpenMenu("loading");@@@@21.06
             UIFunctions scriptUi = this.GetComponent<UIFunctions>();
             scriptUi.openLoadingScreen();
             roomNameInputField.text = "";
@@ -155,8 +141,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
             int tempSeed = UnityEngine.Random.Range(0, 100000);
 
             hash["seed"] = tempSeed;
-            ///
-            //15.06~~FINDQUICK
             hash["playerSpeed"] = SetGameSettings.Instance.getPlayerSpeed();
             hash["EnemyHealth"] = SetGameSettings.Instance.getEnemyHealth();
             hash["EnemySpeed"] = SetGameSettings.Instance.getEnemySpeed();
@@ -180,7 +164,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
         menuManager.Instance.OpenMenu("room");
         UIFunctions scriptUi = this.GetComponent<UIFunctions>();
-        scriptUi.openroomsMenu();//22.06
+        scriptUi.openroomsMenu();
 
 
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
@@ -206,7 +190,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-       // menuManager.Instance.OpenMenu("loading");//@@@@21.06
         UIFunctions scriptUi = this.GetComponent<UIFunctions>();
         scriptUi.openLoadingScreen();
     }
@@ -214,7 +197,6 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     public void JoinRoom(RoomInfo info)
     {
         PhotonNetwork.JoinRoom(info.Name);
-       // menuManager.Instance.OpenMenu("loading");///@@@21.06
         UIFunctions scriptUi = this.GetComponent<UIFunctions>();
         scriptUi.openLoadingScreen();
     }
@@ -277,13 +259,11 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
     public void goToFreeRoam()
     {
-      //  PhotonNetwork.OfflineMode = true;
         SceneManager.LoadScene("FreeRoam");
     }
 
     public void goToSurvival()
     {
-        //  PhotonNetwork.OfflineMode = true;
         SceneManager.LoadScene("Survival");
     }
 
@@ -319,20 +299,17 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         {
             mapIndex = 0;
             menuManager.Instance.OpenMenu("room_settings");
-       //     generateLevel();
         }
         if (buttomText.Equals("Map 1"))
         {
             mapIndex = 1;
             menuManager.Instance.OpenMenu("room_settings");
-            //    generateLevel();
         }
 
         if (buttomText.Equals("Map 2"))
         {
             mapIndex = 2;
             menuManager.Instance.OpenMenu("room_settings");
-            //   generateLevel();
         }
     }
 
@@ -341,17 +318,9 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
         bool setSettingResults = SetGameSettings.Instance.setSettingsFromTextBox();
         if (setSettingResults == false)
         {
-            Debug.Log("!!!!");
             return;
         }
 
-
-      //  if (isMultiplayer)
-      //  {
-      //      return;
-     //   }
-     //   else
-      //  {
             if (isSurvival)
             {
                 switch (mapIndex)
@@ -429,22 +398,18 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
     }
     public void goToSurvivalMap1()
     {
-        //  PhotonNetwork.OfflineMode = true;
         SceneManager.LoadScene("SurvivalMap1");
     }
     public void goToSurvivalMap2()
     {
-        //  PhotonNetwork.OfflineMode = true;
         SceneManager.LoadScene("SurvivalMap2");
     }
     public void goToFreeRoamMap1()
     {
-        //  PhotonNetwork.OfflineMode = true;
         SceneManager.LoadScene("FreeRoam 1");
     }
     public void goToFreeRoamMap2()
     {
-        //  PhotonNetwork.OfflineMode = true;
         SceneManager.LoadScene("FreeRoam 2");
     }
 

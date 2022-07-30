@@ -18,14 +18,10 @@ public class SC_Bullet : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        //19.06
         StatisticsHolder.bulletsShot++;
 
-        /////
-   //     Debug.Log("bullet time");
         newPos = transform.position;
         oldPos = newPos;
-     //   Debug.Log("POS AT BULLET is: " + newPos);
 
         while (currentTime < destroyAfter && !hasHit)
         {
@@ -38,19 +34,13 @@ public class SC_Bullet : MonoBehaviour
             // Check if we hit anything on the way
             if (Physics.Raycast(oldPos, direction, out hit, distance))
             {
-          //      if (hit.rigidbody != null)
-          //      {
-          //          hit.rigidbody.AddForce(direction * hitForce);
-
                     IDamageable npc = hit.transform.GetComponent<IDamageable>();
                 Debug.Log(hit.transform);
                     if (npc != null)
                     {
                     //Apply damage to NPC
-                //    Debug.Log(damagePoints);
                     npc.TakeDamage(damagePoints);
                     }
-               // }
 
                 newPos = hit.point; //Adjust new position
                 StartCoroutine(DestroyBullet());

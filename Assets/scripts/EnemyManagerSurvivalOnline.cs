@@ -8,9 +8,7 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
 {
     public static EnemyManagerSurvivalOnline Instance;
     public GameObject EnemyPrefab;
-    //  public Transform PlayerTransform;
     public Vector3 bias;
-    //public Vector3 spawnPoint ;
     GameObject Enemy;
 
     public float spawnInterval = 2; //Spawn new enemy each n seconds
@@ -47,11 +45,8 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
         enemiesPerWave = 2;
         enemiesToEliminate = waveNumber * enemiesPerWave;
 
-        ///18.06
-        ///
         StatisticsHolder.gamesPlayed++;
         StatisticsHolder.maxWaveReached = waveNumber;
-        //
 
 
         initializeLimitCoordinates();
@@ -137,10 +132,6 @@ public class EnemyManagerSurvivalOnline : MonoBehaviour
         waveNumber++;
         enemiesToEliminate +=  waveNumber * enemiesPerWave;
 
-
-        ///18.06
-        ///
         StatisticsHolder.maxWaveReached = waveNumber;
-        //
     }
 }

@@ -12,7 +12,7 @@ public class MovementOffline : MonoBehaviour
 
 
 
-    void Start()//HERE!!!
+    void Start()
     {
 
         //EnemyManager.Instance.addPlayer(this.transform);

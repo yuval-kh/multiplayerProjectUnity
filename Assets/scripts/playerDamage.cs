@@ -56,11 +56,8 @@ public class playerDamage : MonoBehaviourPun, IDamageable
         Movement movement = gameObject.GetComponent<Movement>();
         PhotonView pv = gameObject.GetComponent<PhotonView>();
 
-        ////////////////////////18.06
-        ///
         pv.RPC("updateStats", RpcTarget.All);
 
-        ////
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
             var list = GameObject.FindGameObjectsWithTag("Enemy");
@@ -69,7 +66,6 @@ public class playerDamage : MonoBehaviourPun, IDamageable
                 enemy.SetActive( false);
             }
         }
-        ////////////////////////
         if (movement != null)
         {
             if (pv == null)

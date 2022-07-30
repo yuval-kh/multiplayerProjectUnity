@@ -20,15 +20,9 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
     NavMeshAgent agent;
     float nextAttackTime = 0;
     private List<Transform> players;
-
-
-
-    ////////////
     int myCounter;
     bool isCalled;
     bool willDie;
-    /////////////
-    ///
 
     public bool isActivateAtDist;
     public float activateDistance;
@@ -37,12 +31,8 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        ////////////////
         isCalled = false;
         willDie = false;
-        ////////////////
-        
-
         players = new List<Transform>();
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackDistance;
@@ -67,7 +57,6 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
         if (willDie)
         {
             return;
-            //updateList();
         }
         float closestDist = Vector3.Distance(agent.transform.position, players[0].position);
         Transform minPlayer = players[0];
@@ -116,7 +105,6 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
 
                         IDamageable player = hit.transform.GetComponent<IDamageable>();
                         Debug.Log("Damage to player");
-                        // player.TakeDamage(npcDamage);
                     }
                 }
             }
@@ -132,16 +120,8 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
         npcHP -= damage;
         if(npcHP <= 0)
         {
-            //18.06
             StatisticsHolder.EnemiesKilled++;
-
-            //
-
-
-
-
             willDie = true;
-            ///////////////
             if(EnemyManager.Instance != null && !isCalled)
             {
                 isCalled = true;
@@ -149,42 +129,22 @@ public class SC_NPCEnemy : MonoBehaviour, IDamageable
                 return;
             }
 
-
-            //////////////
-
-
-
-
             //Destroy the NPC
             GameObject npcDead = Instantiate(npcDeadPrefab, transform.position, transform.rotation);
             //Slightly bounce the npc dead prefab up
             Destroy(npcDead, 10);
-            DestroyImmediate(gameObject);/////////!!!111111111111
+            DestroyImmediate(gameObject);
         }
     }
     public void updateList()
     {
         players.RemoveAll(player => player == null);
-        /* foreach (Transform player in players.ToList())
-         {
-             if (willDie)
-                 return;
-             if (players != null )
-             {
-                 if (player == null)
-                 {
-                     players.RemoveAll(player => player == null);
-                 }
-             }
-         }*/
     }
     public void addPlayer(Transform PlayerTransform)
     {
         players.Add(PlayerTransform);
     }
 
-    /////////////////////
-    ///
     public void setMyCounter(int counter)
     {
         this.myCounter = counter;

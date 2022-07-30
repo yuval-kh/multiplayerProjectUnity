@@ -11,13 +11,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     public static Launcher Instance;
 
     [SerializeField] TMP_InputField playerNameInputField;
-    //[SerializeField] TMP_Text titleWelcomeText;
 
 
-    ////#### ====> means i changed it or needed to change because of the menu change.
-    public GameObject mainLoginMenu; ////######
-    public GameObject LoadingMenu; ////######
- //  public GameObject roomManager;
+    public GameObject mainLoginMenu;
+    public GameObject LoadingMenu;
 
 
 
@@ -32,7 +29,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-    //    Instantiate(roomManager, new Vector3(0,0,0), Quaternion.identity);
         if (!PhotonNetwork.IsConnected)
         {
               Debug.Log("Connecting to master...");
@@ -42,7 +38,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("already connected");
-            menuManager.Instance.OpenMenu("gameover");////######
+            menuManager.Instance.OpenMenu("gameover");
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             PhotonNetwork.JoinLobby();
@@ -61,17 +57,16 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (PhotonNetwork.NickName == "")
         {
             PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString(); // Set a default nickname, just as a backup
-             // menuManager.Instance.OpenMenu("login");/////17.06////######
             mainLoginMenu.SetActive(true);
             LoadingMenu.SetActive(false);
 
         }
         else
         {
-            if (!menuManager.Instance.MenuIsActive("gameover"))/////######
+            if (!menuManager.Instance.MenuIsActive("gameover"))
             {
 
-                menuManager.Instance.OpenMenu("title");////######
+                menuManager.Instance.OpenMenu("title");
             }
         }
         Debug.Log("Joined lobby regular");
@@ -83,8 +78,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (!string.IsNullOrEmpty(name))
         {
             PhotonNetwork.NickName = name;
-           // DefaultSettingsGame.initiateValues();
-            //      titleWelcomeText.text = $"Welcome, {name}!";
             PhotonNetwork.LoadLevel(2);
             Destroy(this);
             return;

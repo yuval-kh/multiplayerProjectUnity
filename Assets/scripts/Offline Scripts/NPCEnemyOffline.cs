@@ -47,34 +47,24 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
 
         Transform childTransform = this.gameObject.transform.GetChild(0).GetComponent<Transform>();
         childTransform.position = this.transform.position;
-
-   //     isActivateAtDist = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         agent.destination = player.position;
-        /////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?////////////////////////
-        //isActivateAtDist = true;
         var navMesh = this.GetComponent<NavMeshAgent>();
-        //Debug.Log("The activateDistance is: " + activateDistance);
-        //Debug.Log("The remaining distance is: " + agent.remainingDistance);
-        //Debug.Log("is activate at dist: " + isActivateAtDist);
         float remainingDist = this.GetRemainingDistance(navMesh);
         if (agent.remainingDistance == 0)
             return;
-        if (isActivateAtDist && remainingDist >= activateDistance )// edited 13.06
+        if (isActivateAtDist && remainingDist >= activateDistance )
         {
             if (Input.GetKeyDown("l"))
             {
                 Debug.Log("remain: " + agent.remainingDistance);
             }
             navMesh.isStopped = true;
-     //       Debug.Log("dont move");
             return;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////
         navMesh.isStopped = false;
         isActivateAtDist = false;
 
@@ -118,28 +108,16 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
         if(npcHP <= 0)
         {
 
-            //18.06
             StatisticsHolder.EnemiesKilled++;
 
-            //
-
-
-
             Debug.Log("NPC dead");
-            //HERE THE LAST CHANGES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111111111111111111111111
             var enemyManagerSurvival = transform.GetComponent<UpdateEnemyManagerSurvival>();
             if (enemyManagerSurvival != null)
             {
                 Debug.Log("in the if");
                 enemyManagerSurvival.DeadUpdate();
-            }
+            }            
 
-            //HERE THE LAST CHANGES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111111111111111111111111
-            
-                
-                
-                
-                
                 //Destroy the NPC
             GameObject npcDead = Instantiate(npcDeadPrefab, transform.position, transform.rotation);
             //Slightly bounce the npc dead prefab up
@@ -148,7 +126,6 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
         }
     }
     
-
     public void setMovementSpeed(int speed)
     {
         movementSpeed = speed;
@@ -160,8 +137,6 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
 
 
 
-
-//added at 13.06
 public float GetRemainingDistance( NavMeshAgent nm)
     {
         float distance = 0;

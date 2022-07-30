@@ -31,8 +31,6 @@ public class NPCEnemyOfflineTutorial : MonoBehaviour, IDamageable
     {
         movementSpeed = SetGameSettings.Instance.getEnemySpeed();
         npcHP = SetGameSettings.Instance.getEnemyHealth();
-       // npcDeadPrefab = (GameObject)Resources.Load("prefabs/Enemy (Dead)", typeof(GameObject));
-
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackDistance;
@@ -75,27 +73,15 @@ public class NPCEnemyOfflineTutorial : MonoBehaviour, IDamageable
     }
 
 
-        public void TakeDamage(float damage)//HERE!!!!
+        public void TakeDamage(float damage)
     {
         Debug.Log("NPC Took Damage " + npcHP);
         npcHP -= damage;
         if(npcHP <= 0)
         {
-            //18.06
             StatisticsHolder.EnemiesKilled++;
-
-            //
-
-
-
-
-            Debug.Log("NPC dead");
-            
-                
-                
-                
-                
-                //Destroy the NPC
+            Debug.Log("NPC dead"); 
+            //Destroy the NPC
             GameObject npcDead = Instantiate(npcDeadPrefab, transform.position, transform.rotation);
             //Slightly bounce the npc dead prefab up
             Destroy(npcDead, 10);

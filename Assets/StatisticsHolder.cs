@@ -76,13 +76,6 @@ public static class StatisticsHolder
         }
     }
 
-
-    /*    public static int EnemiesKilled = 0;
-        public static int timePlayed = 0; // will be int number - the minutes that the player played.
-        public static int gamesPlayed = 0;
-        public static int totalDeaths = 0;
-        private static int maxWave = 0;
-        public static int bulletsShot = 0;*/
     public static float kdRatio
     {
         get
