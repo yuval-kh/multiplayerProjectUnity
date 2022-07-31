@@ -9,8 +9,7 @@ public class addToEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //     if (SceneManager.GetActiveScene().buildIndex != 1)
-        //       return;
+
         if (!isRightLevel()) return;
         var pv = gameObject.GetComponent<PhotonView>();
         

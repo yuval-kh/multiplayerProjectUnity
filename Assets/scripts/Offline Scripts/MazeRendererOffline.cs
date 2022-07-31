@@ -35,6 +35,7 @@ public class MazeRendererOffline : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        width = height = SetGameSettings.Instance.getMazeSize();
         locationsList = new Vector3[width, height];
         int seed = Random.Range(1, 10000);
         Debug.Log("The seed is " + seed);

@@ -65,38 +65,25 @@ public class RandomLocationGenerator : MonoBehaviour
 
 
 
-        /////////////////
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             Debug.Log("IN THE WRONG IF");
             if (PhotonNetwork.IsMasterClient)
             {
-          //      var pv = gameObject.GetComponent<PhotonView>();
                 float x = transform.position.x;
                 float y = transform.position.y;
                 float z = transform.position.z;
-                if(pv == null)
-                {
-                    Debug.Log("!!!!!!!!!!!!!!!!11");
-                }
                 if (pv != null)
                 {
                     pv.RPC("generateSameLocation", RpcTarget.All, x, y, z);
                 }
             }
         }
-        ////////////////
     }
 
     [PunRPC]
     public void generateSameLocation(float x, float y, float z)
     {
-        /*Debug.Log("X: " + x + "  Y: " + y + "z: " + z);
-        Debug.Log("X: !!!!!!!!!!!!!!!!!!!!!111111111111111!!!!!!!!!!!!!");
-        //    return;
-        Vector3 newPosition = new Vector3(x, y, z);
-        transform.position = newPosition;*/
-        Debug.Log("X: !!!!!!!!!!!!!!!!!!!!!111111111111111!!!!!!!!!!!!!");
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         Vector3 newPosition = new Vector3(x, y, z);
         transform.position = newPosition;

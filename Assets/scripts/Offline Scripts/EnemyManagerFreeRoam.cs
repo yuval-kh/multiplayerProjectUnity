@@ -50,8 +50,6 @@ public class EnemyManagerFreeRoam : MonoBehaviour
             {
                 enTurorial.setDeadPrefab(npcDeadPrefab);
             }
-            ///////////////09.06
-            //           en.setMovementSpeed(EnemySpeed);
 
         }
     }

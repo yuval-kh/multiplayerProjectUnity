@@ -101,7 +101,7 @@ public class NPCEnemyOffline : MonoBehaviour, IDamageable
     }
 
 
-        public void TakeDamage(float damage)//HERE!!!!
+        public void TakeDamage(float damage)
     {
         Debug.Log("NPC Took Damage " + npcHP);
         npcHP -= damage;

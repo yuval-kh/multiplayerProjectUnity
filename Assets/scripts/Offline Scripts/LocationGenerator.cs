@@ -72,27 +72,7 @@ public class LocationGenerator : MonoBehaviour
 
     }
 
-    /*    public Vector3 generateLocation()
-        {
-            var loc = new Vector3(Random.Range(minX, maxX), transform.position.y, Random.Range(minZ, maxZ));
-            bool isContains = false;
-            foreach( var obj in lst)
-            {
-                var Collider = obj.GetComponent<BoxCollider>();
-                if(Collider != null)
-                {
-                    if (Collider.bounds.Contains(loc))
-                    {
-                        isContains = true;
-                    }
-                }
-            }
-            if (isContains)
-                generateLocation();
-            return loc;
 
-
-        }*/
     public Vector3 generateLocation()
     {
         if (!isSameToAll)

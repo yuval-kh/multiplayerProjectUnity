@@ -62,17 +62,11 @@ public class ShootOffline : MonoBehaviour
 
 private void Fire()
     {
-    //    if (Input.GetButtonDown("Fire1"))//was GetButton && Time.time >= nextFire)// if the player pressed to shoot and i can fire(depends on the gun fire rate)
-     //   {
             Debug.Log("SHOOTING");
             Vector3 pos = transform.position;
             Vector3 forward = transform.forward;
-            //  Vector3 forward = camera.transform.forward;
               shoot( pos, forward);
-            //  shoot();
-         //   }
 
-        //}
     }
 
 private void shoot(Vector3 pos, Vector3 forward)
@@ -89,36 +83,22 @@ private void shoot(Vector3 pos, Vector3 forward)
             if (bulletsPerMagazine > 0)
             {
 
-
-
-
                 //Point fire point at the current center of Camera
                 Vector3 firePointPointerPosition = pos + forward * 100;
-                //   Vector3 firePointPointerPosition = camera.transform.position + camera.transform.forward * 100;
                 RaycastHit hit;
                 if (Physics.Raycast(pos, forward, out hit, 100))
                 {
                     firePointPointerPosition = hit.point;
                 }
-                // firePoint.LookAt(firePointPointerPosition);////////////////////////////////////////////
 
 
                 bulletsPerMagazine--;
-            //    text.text = bulletsPerMagazine.ToString();
                 Debug.Log(bulletsPerMagazine);
-
 
                 //Fire
                 GameObject bulletObject = Instantiate(bulletPrefab, pos, firePoint.rotation);
                 SC_Bullet bullet = bulletObject.GetComponent<SC_Bullet>();
                 bullet.SetDamage(weaponDamage);
-                /*                GameObject bulletObject = PhotonNetwork.Instantiate("Bullet", pos, firePoint.rotation);
-                                SC_Bullet bullet = bulletObject.GetComponent<SC_Bullet>();
-                            Debug.Log("MAKE DAMAGE: "+ weaponDamage);
-                                //Set bullet damage according to weapon damage value
-                                bullet.SetDamage(weaponDamage);*/
-
-                //
 
             }
             else
@@ -128,8 +108,6 @@ private void shoot(Vector3 pos, Vector3 forward)
 
         }
 
-
-
     }
 
     IEnumerator Reload()
@@ -138,8 +116,6 @@ private void shoot(Vector3 pos, Vector3 forward)
         Debug.Log("Reload");
         yield return new WaitForSeconds(timeToReload);
         bulletsPerMagazine = bulletsPerMagazineDefault;
-     //   text.text = bulletsPerMagazine.ToString();
-
         canFire = true;
     }
 
@@ -150,6 +126,5 @@ private void shoot(Vector3 pos, Vector3 forward)
         StopAllCoroutines();
         canFire = true;
         gameObject.SetActive(activate);
-      //  text.text = bulletsPerMagazine.ToString();
     }
 }

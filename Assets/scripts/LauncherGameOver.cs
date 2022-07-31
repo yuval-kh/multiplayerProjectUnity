@@ -64,7 +64,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
 
 
         buildMapIndexMp = -1;
-        if (reloadedNum == 0)// NEW REMOVED IF 22.06
+        if (reloadedNum == 0)
         {
             Debug.Log("MAIN");
             UIFunctions scriptUi = this.GetComponent<UIFunctions>();
@@ -147,6 +147,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
             hash["EnemyDamage"] = SetGameSettings.Instance.getEnemyDamage();
             hash["ActivationDist"] = SetGameSettings.Instance.getActivationDist();
             hash["FirstRound"] = SetGameSettings.Instance.getFirstRound();
+            hash["MazeSize"] = SetGameSettings.Instance.getMazeSize();
 
             ///
             PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
@@ -160,6 +161,7 @@ public class LauncherGameOver : MonoBehaviourPunCallbacks
             SetGameSettings.Instance.setEnemyDamage((int)properties["EnemyDamage"]);
             SetGameSettings.Instance.setActivationDist((int)properties["ActivationDist"]);
             SetGameSettings.Instance.setFirstRound((int)properties["FirstRound"]);
+            SetGameSettings.Instance.setFirstRound((int)properties["MazeSize"]);
         }
 
         menuManager.Instance.OpenMenu("room");

@@ -43,18 +43,6 @@ public class EnemyManagerSurvivalMap1 : MonoBehaviour
         initializeLimitCoordinates();
         //Wait 10 seconds for new wave to start
         newWaveTimer = 10;
-     //   waitingForWave = false;
-
-
-        //  Vector3 randomPosition = generateRandomPoint();
-        // GameObject enemy = Instantiate(EnemyPrefab, randomPosition, Quaternion.identity);
-        //   var script = enemy.GetComponent<NPCEnemyOffline>();
-        // script.isActivateAtDist = true;
-        //   script.activateDistance = 2;
-        //   enemiesEliminated = 0;
-        //        totalEnemiesSpawned = 1;
-        //    enemiesToEliminate = 1;
-
         waitingForWave = true;
         enemiesPerWave = 2;
 
@@ -66,12 +54,6 @@ public class EnemyManagerSurvivalMap1 : MonoBehaviour
         //return;
         if (waitingForWave)
         {
-        //    if (newWaveTimer >= 0)
-      //      {
-        //        newWaveTimer -= Time.deltaTime;
-       //     }
-         //   else
-           // {
                 //Initialize new wave
                 enemiesToEliminate = waveNumber * enemiesPerWave;
             Debug.Log("wave num: "+ waveNumber);
@@ -80,18 +62,12 @@ public class EnemyManagerSurvivalMap1 : MonoBehaviour
                 enemiesEliminated = 0;
                 totalEnemiesSpawned = 0;
                 waitingForWave = false;
-           // }
         }
         else
         {
-           // if (Time.time > nextSpawnTime)
-        //    {
-         //       nextSpawnTime = Time.time + spawnInterval;
-
                 //Spawn enemy 
                 if (totalEnemiesSpawned < enemiesToEliminate)
                 {
-                    //Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
                     Vector3 randomPosition = generateRandomPoint();
 
 
@@ -119,8 +95,7 @@ public class EnemyManagerSurvivalMap1 : MonoBehaviour
                     scriptOffline.activateDistance = SetGameSettings.Instance.getActivationDist();
 
                 }
-                //    var npc = enemy.GetComponent<UpdateEnemyManagerSurvival>();
-                //       npc.enemyManager = this;
+
                 totalEnemiesSpawned++;
                 }
           //  }
@@ -156,20 +131,10 @@ public class EnemyManagerSurvivalMap1 : MonoBehaviour
     private Vector3 generateRandomPoint()
     {
 
-
-  //      float rndX = Random.Range(minX, maxX);
         var locationGenerator = GameObject.Find("LocationGenerator");
-        
-        //if (locationGenerator != null)
-        //{
             var sc = locationGenerator.GetComponent<LocationGenerator>();
         var result =  sc.generateRandomVector();
         return result;
-   //         float y = sc.getFloorHeight();
-        //}
-      //    float y = PlayerTransform.position.y; // the y should not be random its the floor of the level here
-      //  float rndZ = Random.Range(minZ, maxZ);
-     //   return new Vector3(rndX, y, rndZ);
     }
 
     public void EnemyEliminated()

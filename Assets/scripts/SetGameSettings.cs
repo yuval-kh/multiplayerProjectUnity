@@ -23,6 +23,8 @@ public class SetGameSettings : MonoBehaviour
     private TMP_InputField ActivationDistTextBox;
     [SerializeField]
     private TMP_InputField FirstRoundTextBox;
+    [SerializeField]
+    private TMP_InputField MazeSizeTextBox;
 
 
     int playerSpeed;
@@ -31,6 +33,7 @@ public class SetGameSettings : MonoBehaviour
     int EnemyDamage;
     int ActivationDist;
     int FirstRound;
+    int MazeSize;
 
 
     private void Awake()
@@ -54,7 +57,7 @@ public class SetGameSettings : MonoBehaviour
     void Start()
     {
         if (playerSpeedTextBox == null) Destroy(this);
-        playerSpeed = EnemyHealth = EnemySpeed = EnemyDamage = ActivationDist = FirstRound = -1;
+        playerSpeed = EnemyHealth = EnemySpeed = EnemyDamage = ActivationDist = FirstRound = MazeSize =-1;
     }
     public bool setSettingsFromTextBox()
     {
@@ -67,8 +70,9 @@ public class SetGameSettings : MonoBehaviour
         int EnemyDamage = getNumber(EnemyDamageTextBox.text);
         int ActivationDist = getNumber(ActivationDistTextBox.text);
         int FirstRound = getNumber(FirstRoundTextBox.text);
+        int MazeSize = getNumber(MazeSizeTextBox.text);
         if (playerSpeed == -1 || EnemyHealth == -1 || EnemySpeed == -1 || EnemyDamage == -1 ||
-            ActivationDist == -1 || FirstRound == -1) 
+            ActivationDist == -1 || FirstRound == -1 || MazeSize == -1) 
             return false;
         this.playerSpeed = playerSpeed;
         this.EnemyHealth = EnemyHealth;
@@ -76,7 +80,7 @@ public class SetGameSettings : MonoBehaviour
         this.EnemyDamage = EnemyDamage;
         this.ActivationDist = ActivationDist;
         this.FirstRound = FirstRound;
-        
+        this.MazeSize = MazeSize;
         return true;
     }
 
@@ -107,6 +111,7 @@ public class SetGameSettings : MonoBehaviour
             Debug.Log("EnemyDamage: " + EnemyDamage);
             Debug.Log("ActivationDist: " + ActivationDist);
             Debug.Log("FirstRound: " + FirstRound);
+            Debug.Log("MazeSize: " + MazeSize);
         }
     }
 
@@ -116,6 +121,7 @@ public class SetGameSettings : MonoBehaviour
     public int getEnemyDamage() { return this.EnemyDamage; }
     public int getActivationDist() { return this.ActivationDist; }
     public int getFirstRound() { return this.FirstRound; }
+    public int getMazeSize() { return this.MazeSize; }
 
     public void setPlayerSpeed(int playerSpeed) { this.playerSpeed = playerSpeed; }
     public void setEnemyHealth(int EnemyHealth) { this.EnemyHealth = EnemyHealth; }
@@ -123,4 +129,6 @@ public class SetGameSettings : MonoBehaviour
     public void setEnemyDamage(int EnemyDamage) { this.EnemyDamage = EnemyDamage; }
     public void setActivationDist(int ActivationDist) { this.ActivationDist = ActivationDist; }
     public void setFirstRound(int FirstRound) { this.FirstRound = FirstRound; }
+
+    public void setMazeSize(int value) { this.MazeSize = value; }
 }

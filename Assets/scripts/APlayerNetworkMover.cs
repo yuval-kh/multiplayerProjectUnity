@@ -29,9 +29,8 @@ public class APlayerNetworkMover : MonoBehaviourPunCallbacks, IPunObservable {
         }
     }
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
+
+    // Awake is called when the script instance is being loaded.
     void Awake() {
         // FirstPersonController script require cameraObject to be active in its Start function.
         // sets the camera on only to my player: to all the other players the camera is not active.
@@ -61,18 +60,12 @@ public class APlayerNetworkMover : MonoBehaviourPunCallbacks, IPunObservable {
         }
     }
 
-    /// <summary>
-    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-    /// </summary>
+    // This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
     void FixedUpdate() {
         if (photonView.IsMine)
         {
             animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
             animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
-            //    if (Input.GetButtonDown("Jump")) {
-            //      animator.SetTrigger("IsJumping");
-            //    }
-            //      animator.SetBool("Running", Input.GetKey(KeyCode.LeftShift));
         }
     }
 

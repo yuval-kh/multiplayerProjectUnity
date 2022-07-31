@@ -34,13 +34,10 @@ public class ChatManager : MonoBehaviour
     {
         messages = new Queue<string>(messageCount);
         pv = GetComponent<PhotonView>();
-
-        //   List<string> players = new List<string>();
         if (PhotonNetwork.IsMasterClient)
         {
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
-                //   players.Add(player.NickName);
                 AddMessage("The player " + player.NickName + " joined the room");
             }
         }
@@ -64,8 +61,6 @@ public class ChatManager : MonoBehaviour
             }
 
         }
-       // OnGUI();
-
     }
 
     void OnGUI()
@@ -73,7 +68,6 @@ public class ChatManager : MonoBehaviour
         pv = GetComponent<PhotonView>();
         string myname =  PhotonNetwork.LocalPlayer.NickName;
         Event e = Event.current;
-        //e.type == EventType.KeyDown && e.keyCode.ToString().Length == 1 &&char.IsLetter(e.keyCode.ToString()[0])
         if (e.type == EventType.KeyDown && e.isKey)// && e.keyCode.ToString().Length == 1)
         {
             if(isPressed && e.keyCode == KeyCode.Return)
@@ -100,7 +94,6 @@ public class ChatManager : MonoBehaviour
                 }
 
             }
-            //Debug.Log("Detected key code: " + e.keyCode);
         }
     }
 

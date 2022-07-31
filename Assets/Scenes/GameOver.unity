@@ -23094,6 +23094,7 @@ MonoBehaviour:
   EnemyDamageTextBox: {fileID: 497156529}
   ActivationDistTextBox: {fileID: 1913145212}
   FirstRoundTextBox: {fileID: 2094674694}
+  MazeSizeTextBox: {fileID: 1835648495}
 --- !u!4 &1333852223
 Transform:
   m_ObjectHideFlags: 0
